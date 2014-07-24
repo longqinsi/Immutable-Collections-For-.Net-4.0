@@ -12,7 +12,7 @@
     using Validation;
 
     [DebuggerDisplay("Count = {Count}"), DebuggerTypeProxy(typeof(ImmutableList<>.DebuggerProxy))]
-    public sealed class ImmutableList<T> : IImmutableList<T>, IList<T>, ICollection<T>, IList, ICollection, IOrderedCollection<T>, IImmutableListQueries<T>, IReadOnlyList<T>, IReadOnlyCollection<T>, IEnumerable<T>, IEnumerable
+    public sealed class ImmutableList<T> : IImmutableList<T>, IList<T>, ICollection<T>, IList, ICollection, IOrderedCollection<T>, IImmutableListQueries<T>, IReadOnlyListV40<T>, IReadOnlyCollectionV40<T>, IEnumerable<T>, IEnumerable
     {
         public static readonly ImmutableList<T> Empty;
         private readonly Node root;
@@ -114,10 +114,10 @@
 
         private ImmutableList<T> FillFromEmpty(IEnumerable<T> items)
         {
-            ImmutableList<T> list;
-            if (ImmutableList<T>.TryCastToImmutableList(items, out list))
+            ImmutableList<T> listV40;
+            if (ImmutableList<T>.TryCastToImmutableList(items, out listV40))
             {
-                return list;
+                return listV40;
             }
             IOrderedCollection<T> ordereds = items.AsOrderedCollection<T>();
             if (ordereds.Count == 0)
@@ -653,19 +653,19 @@
         }
 
         [DebuggerDisplay("Count = {Count}"), DebuggerTypeProxy(typeof(ImmutableList<>.DebuggerProxy))]
-        public sealed class Builder : IList<T>, ICollection<T>, IList, ICollection, IOrderedCollection<T>, IImmutableListQueries<T>, IReadOnlyList<T>, IReadOnlyCollection<T>, IEnumerable<T>, IEnumerable
+        public sealed class Builder : IList<T>, ICollection<T>, IList, ICollection, IOrderedCollection<T>, IImmutableListQueries<T>, IReadOnlyListV40<T>, IReadOnlyCollectionV40<T>, IEnumerable<T>, IEnumerable
         {
             private ImmutableList<T> immutable;
             private ImmutableList<T>.Node root;
             private object syncRoot;
             private int version;
 
-            internal Builder(ImmutableList<T> list)
+            internal Builder(ImmutableList<T> listV40)
             {
                 this.root = ImmutableList<T>.Node.EmptyNode;
-                Requires.NotNull<ImmutableList<T>>(list, "list");
-                this.root = list.root;
-                this.immutable = list;
+                Requires.NotNull<ImmutableList<T>>(listV40, "listV40");
+                this.root = listV40.root;
+                this.immutable = listV40;
             }
 
             public void Add(T item)
@@ -1120,10 +1120,10 @@
             private T[] cachedContents;
             private readonly ImmutableList<T>.Node list;
 
-            public DebuggerProxy(ImmutableList<T> list)
+            public DebuggerProxy(ImmutableList<T> listV40)
             {
-                Requires.NotNull<ImmutableList<T>>(list, "list");
-                this.list = list.root;
+                Requires.NotNull<ImmutableList<T>>(listV40, "listV40");
+                this.list = listV40.root;
             }
 
             public DebuggerProxy(ImmutableList<T>.Builder builder)

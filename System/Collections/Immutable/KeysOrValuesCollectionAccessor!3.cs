@@ -8,14 +8,14 @@
 
     internal abstract class KeysOrValuesCollectionAccessor<TKey, TValue, T> : ICollection<T>, IEnumerable<T>, ICollection, IEnumerable
     {
-        private readonly IImmutableDictionary<TKey, TValue> dictionary;
+        private readonly IImmutableDictionary<TKey, TValue> dictionaryV40;
         private readonly IEnumerable<T> keysOrValues;
 
-        protected KeysOrValuesCollectionAccessor(IImmutableDictionary<TKey, TValue> dictionary, IEnumerable<T> keysOrValues)
+        protected KeysOrValuesCollectionAccessor(IImmutableDictionary<TKey, TValue> dictionaryV40, IEnumerable<T> keysOrValues)
         {
-            Requires.NotNull<IImmutableDictionary<TKey, TValue>>(dictionary, "dictionary");
+            Requires.NotNull<IImmutableDictionary<TKey, TValue>>(dictionaryV40, "dictionaryV40");
             Requires.NotNull<IEnumerable<T>>(keysOrValues, "keysOrValues");
-            this.dictionary = dictionary;
+            this.dictionaryV40 = dictionaryV40;
             this.keysOrValues = keysOrValues;
         }
 
@@ -71,15 +71,15 @@
         {
             get
             {
-                return this.dictionary.Count;
+                return this.dictionaryV40.Count;
             }
         }
 
-        protected IImmutableDictionary<TKey, TValue> Dictionary
+        protected IImmutableDictionary<TKey, TValue> DictionaryV40
         {
             get
             {
-                return this.dictionary;
+                return this.dictionaryV40;
             }
         }
 

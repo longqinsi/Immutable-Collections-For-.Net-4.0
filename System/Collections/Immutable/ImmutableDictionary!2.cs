@@ -13,7 +13,7 @@ namespace System.Collections.Immutable
 {
     [DebuggerDisplay("Count = {Count}")]
     [DebuggerTypeProxy(typeof(ImmutableDictionary<,>.DebuggerProxy))]
-    public sealed class ImmutableDictionary<TKey, TValue> : IImmutableDictionary<TKey, TValue>, IReadOnlyDictionary<TKey, TValue>, IReadOnlyCollection<KeyValuePair<TKey, TValue>>, IImmutableDictionaryInternal<TKey, TValue>, IHashKeyCollection<TKey>, IDictionary<TKey, TValue>, ICollection<KeyValuePair<TKey, TValue>>, IEnumerable<KeyValuePair<TKey, TValue>>, IDictionary, ICollection, IEnumerable
+    public sealed class ImmutableDictionary<TKey, TValue> : IImmutableDictionary<TKey, TValue>, IReadOnlyDictionaryV40<TKey, TValue>, IReadOnlyCollectionV40<KeyValuePair<TKey, TValue>>, IImmutableDictionaryInternal<TKey, TValue>, IHashKeyCollectionV40<TKey>, IDictionary<TKey, TValue>, ICollection<KeyValuePair<TKey, TValue>>, IEnumerable<KeyValuePair<TKey, TValue>>, IDictionary, ICollection, IEnumerable
     {
         public readonly static ImmutableDictionary<TKey, TValue> Empty;
 
@@ -662,7 +662,7 @@ namespace System.Collections.Immutable
 
         [DebuggerDisplay("Count = {Count}")]
         [DebuggerTypeProxy(typeof(ImmutableDictionary<,>.Builder.DebuggerProxy))]
-        public sealed class Builder : IDictionary<TKey, TValue>, ICollection<KeyValuePair<TKey, TValue>>, IReadOnlyDictionary<TKey, TValue>, IReadOnlyCollection<KeyValuePair<TKey, TValue>>, IEnumerable<KeyValuePair<TKey, TValue>>, IDictionary, ICollection, IEnumerable
+        public sealed class Builder : IDictionary<TKey, TValue>, ICollection<KeyValuePair<TKey, TValue>>, IReadOnlyDictionaryV40<TKey, TValue>, IReadOnlyCollectionV40<KeyValuePair<TKey, TValue>>, IEnumerable<KeyValuePair<TKey, TValue>>, IDictionary, ICollection, IEnumerable
         {
             private ImmutableSortedDictionary<Int32, ImmutableDictionary<TKey, TValue>.HashBucket>.Node root;
 

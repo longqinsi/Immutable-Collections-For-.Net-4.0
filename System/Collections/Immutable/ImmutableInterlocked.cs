@@ -14,12 +14,12 @@
             bool flag;
             Requires.NotNull<Func<TKey, TValue>>(addValueFactory, "addValueFactory");
             Requires.NotNull<Func<TKey, TValue, TValue>>(updateValueFactory, "updateValueFactory");
-            ImmutableDictionary<TKey, TValue> dictionary = VolatileV40.Read<ImmutableDictionary<TKey, TValue>>(ref location);
+            ImmutableDictionary<TKey, TValue> dictionaryV40 = VolatileV40.Read<ImmutableDictionary<TKey, TValue>>(ref location);
             do
             {
                 TValue local2;
-                Requires.NotNull<ImmutableDictionary<TKey, TValue>>(dictionary, "location");
-                if (dictionary.TryGetValue(key, out local2))
+                Requires.NotNull<ImmutableDictionary<TKey, TValue>>(dictionaryV40, "location");
+                if (dictionaryV40.TryGetValue(key, out local2))
                 {
                     local = updateValueFactory(key, local2);
                 }
@@ -27,10 +27,10 @@
                 {
                     local = addValueFactory(key);
                 }
-                ImmutableDictionary<TKey, TValue> dictionary2 = dictionary.SetItem(key, local);
-                ImmutableDictionary<TKey, TValue> objB = Interlocked.CompareExchange<ImmutableDictionary<TKey, TValue>>(ref location, dictionary2, dictionary);
-                flag = object.ReferenceEquals(dictionary, objB);
-                dictionary = objB;
+                ImmutableDictionary<TKey, TValue> dictionary2 = dictionaryV40.SetItem(key, local);
+                ImmutableDictionary<TKey, TValue> objB = Interlocked.CompareExchange<ImmutableDictionary<TKey, TValue>>(ref location, dictionary2, dictionaryV40);
+                flag = object.ReferenceEquals(dictionaryV40, objB);
+                dictionaryV40 = objB;
             }
             while (!flag);
             return local;
@@ -41,12 +41,12 @@
             TValue local;
             bool flag;
             Requires.NotNull<Func<TKey, TValue, TValue>>(updateValueFactory, "updateValueFactory");
-            ImmutableDictionary<TKey, TValue> dictionary = VolatileV40.Read<ImmutableDictionary<TKey, TValue>>(ref location);
+            ImmutableDictionary<TKey, TValue> dictionaryV40 = VolatileV40.Read<ImmutableDictionary<TKey, TValue>>(ref location);
             do
             {
                 TValue local2;
-                Requires.NotNull<ImmutableDictionary<TKey, TValue>>(dictionary, "location");
-                if (dictionary.TryGetValue(key, out local2))
+                Requires.NotNull<ImmutableDictionary<TKey, TValue>>(dictionaryV40, "location");
+                if (dictionaryV40.TryGetValue(key, out local2))
                 {
                     local = updateValueFactory(key, local2);
                 }
@@ -54,10 +54,10 @@
                 {
                     local = addValue;
                 }
-                ImmutableDictionary<TKey, TValue> dictionary2 = dictionary.SetItem(key, local);
-                ImmutableDictionary<TKey, TValue> objB = Interlocked.CompareExchange<ImmutableDictionary<TKey, TValue>>(ref location, dictionary2, dictionary);
-                flag = object.ReferenceEquals(dictionary, objB);
-                dictionary = objB;
+                ImmutableDictionary<TKey, TValue> dictionary2 = dictionaryV40.SetItem(key, local);
+                ImmutableDictionary<TKey, TValue> objB = Interlocked.CompareExchange<ImmutableDictionary<TKey, TValue>>(ref location, dictionary2, dictionaryV40);
+                flag = object.ReferenceEquals(dictionaryV40, objB);
+                dictionaryV40 = objB;
             }
             while (!flag);
             return local;
@@ -82,9 +82,9 @@
         {
             TValue local;
             Requires.NotNull<Func<TKey, TValue>>(valueFactory, "valueFactory");
-            ImmutableDictionary<TKey, TValue> dictionary = VolatileV40.Read<ImmutableDictionary<TKey, TValue>>(ref location);
-            Requires.NotNull<ImmutableDictionary<TKey, TValue>>(dictionary, "location");
-            if (dictionary.TryGetValue(key, out local))
+            ImmutableDictionary<TKey, TValue> dictionaryV40 = VolatileV40.Read<ImmutableDictionary<TKey, TValue>>(ref location);
+            Requires.NotNull<ImmutableDictionary<TKey, TValue>>(dictionaryV40, "location");
+            if (dictionaryV40.TryGetValue(key, out local))
             {
                 return local;
             }
@@ -95,19 +95,19 @@
         public static TValue GetOrAdd<TKey, TValue>(ref ImmutableDictionary<TKey, TValue> location, TKey key, TValue value)
         {
             bool flag;
-            ImmutableDictionary<TKey, TValue> dictionary = VolatileV40.Read<ImmutableDictionary<TKey, TValue>>(ref location);
+            ImmutableDictionary<TKey, TValue> dictionaryV40 = VolatileV40.Read<ImmutableDictionary<TKey, TValue>>(ref location);
             do
             {
                 TValue local;
-                Requires.NotNull<ImmutableDictionary<TKey, TValue>>(dictionary, "location");
-                if (dictionary.TryGetValue(key, out local))
+                Requires.NotNull<ImmutableDictionary<TKey, TValue>>(dictionaryV40, "location");
+                if (dictionaryV40.TryGetValue(key, out local))
                 {
                     return local;
                 }
-                ImmutableDictionary<TKey, TValue> dictionary2 = dictionary.Add(key, value);
-                ImmutableDictionary<TKey, TValue> objB = Interlocked.CompareExchange<ImmutableDictionary<TKey, TValue>>(ref location, dictionary2, dictionary);
-                flag = object.ReferenceEquals(dictionary, objB);
-                dictionary = objB;
+                ImmutableDictionary<TKey, TValue> dictionary2 = dictionaryV40.Add(key, value);
+                ImmutableDictionary<TKey, TValue> objB = Interlocked.CompareExchange<ImmutableDictionary<TKey, TValue>>(ref location, dictionary2, dictionaryV40);
+                flag = object.ReferenceEquals(dictionaryV40, objB);
+                dictionaryV40 = objB;
             }
             while (!flag);
             return value;
@@ -117,9 +117,9 @@
         {
             TValue local;
             Requires.NotNull<Func<TKey, TArg, TValue>>(valueFactory, "valueFactory");
-            ImmutableDictionary<TKey, TValue> dictionary = VolatileV40.Read<ImmutableDictionary<TKey, TValue>>(ref location);
-            Requires.NotNull<ImmutableDictionary<TKey, TValue>>(dictionary, "location");
-            if (dictionary.TryGetValue(key, out local))
+            ImmutableDictionary<TKey, TValue> dictionaryV40 = VolatileV40.Read<ImmutableDictionary<TKey, TValue>>(ref location);
+            Requires.NotNull<ImmutableDictionary<TKey, TValue>>(dictionaryV40, "location");
+            if (dictionaryV40.TryGetValue(key, out local))
             {
                 return local;
             }
@@ -145,18 +145,18 @@
         public static bool TryAdd<TKey, TValue>(ref ImmutableDictionary<TKey, TValue> location, TKey key, TValue value)
         {
             bool flag;
-            ImmutableDictionary<TKey, TValue> dictionary = VolatileV40.Read<ImmutableDictionary<TKey, TValue>>(ref location);
+            ImmutableDictionary<TKey, TValue> dictionaryV40 = VolatileV40.Read<ImmutableDictionary<TKey, TValue>>(ref location);
             do
             {
-                Requires.NotNull<ImmutableDictionary<TKey, TValue>>(dictionary, "location");
-                if (dictionary.ContainsKey(key))
+                Requires.NotNull<ImmutableDictionary<TKey, TValue>>(dictionaryV40, "location");
+                if (dictionaryV40.ContainsKey(key))
                 {
                     return false;
                 }
-                ImmutableDictionary<TKey, TValue> dictionary2 = dictionary.Add(key, value);
-                ImmutableDictionary<TKey, TValue> objB = Interlocked.CompareExchange<ImmutableDictionary<TKey, TValue>>(ref location, dictionary2, dictionary);
-                flag = object.ReferenceEquals(dictionary, objB);
-                dictionary = objB;
+                ImmutableDictionary<TKey, TValue> dictionary2 = dictionaryV40.Add(key, value);
+                ImmutableDictionary<TKey, TValue> objB = Interlocked.CompareExchange<ImmutableDictionary<TKey, TValue>>(ref location, dictionary2, dictionaryV40);
+                flag = object.ReferenceEquals(dictionaryV40, objB);
+                dictionaryV40 = objB;
             }
             while (!flag);
             return true;
@@ -207,18 +207,18 @@
         public static bool TryRemove<TKey, TValue>(ref ImmutableDictionary<TKey, TValue> location, TKey key, out TValue value)
         {
             bool flag;
-            ImmutableDictionary<TKey, TValue> dictionary = VolatileV40.Read<ImmutableDictionary<TKey, TValue>>(ref location);
+            ImmutableDictionary<TKey, TValue> dictionaryV40 = VolatileV40.Read<ImmutableDictionary<TKey, TValue>>(ref location);
             do
             {
-                Requires.NotNull<ImmutableDictionary<TKey, TValue>>(dictionary, "location");
-                if (!dictionary.TryGetValue(key, out value))
+                Requires.NotNull<ImmutableDictionary<TKey, TValue>>(dictionaryV40, "location");
+                if (!dictionaryV40.TryGetValue(key, out value))
                 {
                     return false;
                 }
-                ImmutableDictionary<TKey, TValue> dictionary2 = dictionary.Remove(key);
-                ImmutableDictionary<TKey, TValue> objB = Interlocked.CompareExchange<ImmutableDictionary<TKey, TValue>>(ref location, dictionary2, dictionary);
-                flag = object.ReferenceEquals(dictionary, objB);
-                dictionary = objB;
+                ImmutableDictionary<TKey, TValue> dictionary2 = dictionaryV40.Remove(key);
+                ImmutableDictionary<TKey, TValue> objB = Interlocked.CompareExchange<ImmutableDictionary<TKey, TValue>>(ref location, dictionary2, dictionaryV40);
+                flag = object.ReferenceEquals(dictionaryV40, objB);
+                dictionaryV40 = objB;
             }
             while (!flag);
             return true;
@@ -228,19 +228,19 @@
         {
             bool flag;
             EqualityComparer<TValue> comparer = EqualityComparer<TValue>.Default;
-            ImmutableDictionary<TKey, TValue> dictionary = VolatileV40.Read<ImmutableDictionary<TKey, TValue>>(ref location);
+            ImmutableDictionary<TKey, TValue> dictionaryV40 = VolatileV40.Read<ImmutableDictionary<TKey, TValue>>(ref location);
             do
             {
                 TValue local;
-                Requires.NotNull<ImmutableDictionary<TKey, TValue>>(dictionary, "location");
-                if (!dictionary.TryGetValue(key, out local) || !comparer.Equals(local, comparisonValue))
+                Requires.NotNull<ImmutableDictionary<TKey, TValue>>(dictionaryV40, "location");
+                if (!dictionaryV40.TryGetValue(key, out local) || !comparer.Equals(local, comparisonValue))
                 {
                     return false;
                 }
-                ImmutableDictionary<TKey, TValue> dictionary2 = dictionary.SetItem(key, newValue);
-                ImmutableDictionary<TKey, TValue> objB = Interlocked.CompareExchange<ImmutableDictionary<TKey, TValue>>(ref location, dictionary2, dictionary);
-                flag = object.ReferenceEquals(dictionary, objB);
-                dictionary = objB;
+                ImmutableDictionary<TKey, TValue> dictionary2 = dictionaryV40.SetItem(key, newValue);
+                ImmutableDictionary<TKey, TValue> objB = Interlocked.CompareExchange<ImmutableDictionary<TKey, TValue>>(ref location, dictionary2, dictionaryV40);
+                flag = object.ReferenceEquals(dictionaryV40, objB);
+                dictionaryV40 = objB;
             }
             while (!flag);
             return true;

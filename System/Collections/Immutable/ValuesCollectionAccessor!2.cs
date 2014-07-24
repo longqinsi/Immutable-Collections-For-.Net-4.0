@@ -4,18 +4,18 @@
 
     internal class ValuesCollectionAccessor<TKey, TValue> : KeysOrValuesCollectionAccessor<TKey, TValue, TValue>
     {
-        internal ValuesCollectionAccessor(IImmutableDictionary<TKey, TValue> dictionary) : base(dictionary, dictionary.Values)
+        internal ValuesCollectionAccessor(IImmutableDictionary<TKey, TValue> dictionaryV40) : base(dictionaryV40, dictionaryV40.Values)
         {
         }
 
         public override bool Contains(TValue item)
         {
-            ImmutableSortedDictionary<TKey, TValue> dictionary = base.Dictionary as ImmutableSortedDictionary<TKey, TValue>;
-            if (dictionary != null)
+            ImmutableSortedDictionary<TKey, TValue> dictionaryV40 = base.DictionaryV40 as ImmutableSortedDictionary<TKey, TValue>;
+            if (dictionaryV40 != null)
             {
-                return dictionary.ContainsValue(item);
+                return dictionaryV40.ContainsValue(item);
             }
-            IImmutableDictionaryInternal<TKey, TValue> internal2 = base.Dictionary as IImmutableDictionaryInternal<TKey, TValue>;
+            IImmutableDictionaryInternal<TKey, TValue> internal2 = base.DictionaryV40 as IImmutableDictionaryInternal<TKey, TValue>;
             if (internal2 == null)
             {
                 throw new NotSupportedException();

@@ -5,7 +5,7 @@
     using System.Collections.Generic;
     using System.Runtime.InteropServices;
 
-    public interface IImmutableSet<T> : IReadOnlyCollection<T>, IEnumerable<T>, IEnumerable
+    public interface IImmutableSet<T> : IReadOnlyCollectionV40<T>, IEnumerable<T>, IEnumerable
     {
         IImmutableSet<T> Add(T value);
         IImmutableSet<T> Clear();

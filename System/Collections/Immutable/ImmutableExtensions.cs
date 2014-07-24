@@ -69,7 +69,7 @@
                 count = is3.Count;
                 return true;
             }
-            IReadOnlyCollection<T> onlys = sequence as IReadOnlyCollection<T>;
+            IReadOnlyCollectionV40<T> onlys = sequence as IReadOnlyCollectionV40<T>;
             if (onlys != null)
             {
                 count = onlys.Count;

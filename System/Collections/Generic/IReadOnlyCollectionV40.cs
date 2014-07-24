@@ -5,7 +5,7 @@
 // ==--==
 /*============================================================
 **
-** Interface:  IReadOnlyList<T>
+** Interface:  IReadOnlyCollectionV40<T>
 ** 
 ** <OWNER>[....]</OWNER>
 **
@@ -21,34 +21,27 @@ namespace System.Collections.Generic
 
     // Provides a read-only, covariant view of a generic list.
 
-    // Note that T[] : IReadOnlyList<T>, and we want to ensure that if you use
+    // Note that T[] : IReadOnlyListV40<T>, and we want to ensure that if you use
     // IList<YourValueType>, we ensure a YourValueType[] can be used 
     // without jitting.  Hence the TypeDependencyAttribute on SZArrayHelper.
     // This is a special hack internally though - see VM\compile.cpp.
-    // The same attribute is on IList<T>, IEnumerable<T>, ICollection<T> and IReadOnlyCollection<T>.
+    // The same attribute is on IList<T>, IEnumerable<T>, ICollection<T>, and IReadOnlyListV40<T>.
 #if CONTRACTS_FULL
-    [ContractClass(typeof(IReadOnlyListContract<>))]
+    [ContractClass(typeof(IReadOnlyCollectionContract<>))]
 #endif
-    // If we ever implement more interfaces on IReadOnlyList, we should also update RuntimeTypeCache.PopulateInterfaces() in rttype.cs
-    public interface IReadOnlyList<out T> : IReadOnlyCollection<T>
+    // If we ever implement more interfaces on IReadOnlyCollectionV40, we should also update RuntimeTypeCache.PopulateInterfaces() in rttype.cs
+    public interface IReadOnlyCollectionV40<out T> : IEnumerable<T>
     {
-        T this[int index] { get; }
+        int Count { get; }
     }
 
 #if CONTRACTS_FULL
-    [ContractClassFor(typeof(IReadOnlyList<>))]
-    internal abstract class IReadOnlyListContract<T> : IReadOnlyList<T>
+    [ContractClassFor(typeof(IReadOnlyCollectionV40<>))]
+    internal abstract class IReadOnlyCollectionContract<T> : IReadOnlyCollectionV40<T>
     {
-        T IReadOnlyList<T>.this[int index] {
+        int IReadOnlyCollectionV40<T>.Count {
             get {
-                //Contract.Requires(index >= 0);
-                //Contract.Requires(index < ((ICollection<T>)this).Count);
-                return default(T);
-            }
-        }
-
-        int IReadOnlyCollection<T>.Count {
-            get {
+                Contract.Ensures(Contract.Result<int>() >= 0);
                 return default(int);
             }
         }

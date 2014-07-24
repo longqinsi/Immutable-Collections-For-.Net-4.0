@@ -13,7 +13,7 @@
     using Validation;
 
     [DebuggerTypeProxy(typeof(ImmutableSortedDictionary<, >.DebuggerProxy)), DebuggerDisplay("Count = {Count}")]
-    public sealed class ImmutableSortedDictionary<TKey, TValue> : IImmutableDictionary<TKey, TValue>, IReadOnlyDictionary<TKey, TValue>, IReadOnlyCollection<KeyValuePair<TKey, TValue>>, ISortKeyCollection<TKey>, IDictionary<TKey, TValue>, ICollection<KeyValuePair<TKey, TValue>>, IEnumerable<KeyValuePair<TKey, TValue>>, IDictionary, ICollection, IEnumerable
+    public sealed class ImmutableSortedDictionary<TKey, TValue> : IImmutableDictionary<TKey, TValue>, IReadOnlyDictionaryV40<TKey, TValue>, IReadOnlyCollectionV40<KeyValuePair<TKey, TValue>>, ISortKeyCollectionV40<TKey>, IDictionary<TKey, TValue>, ICollection<KeyValuePair<TKey, TValue>>, IEnumerable<KeyValuePair<TKey, TValue>>, IDictionary, ICollection, IEnumerable
     {
         private readonly int count;
         public static readonly ImmutableSortedDictionary<TKey, TValue> Empty;
@@ -369,8 +369,8 @@
                 }
                 return new ImmutableSortedDictionary<TKey, TValue>(this.root, this.count, this.keyComparer, valueComparer);
             }
-            ImmutableSortedDictionary<TKey, TValue> dictionary = new ImmutableSortedDictionary<TKey, TValue>(Node.EmptyNode, 0, keyComparer, valueComparer);
-            return dictionary.AddRange(this, false, true);
+            ImmutableSortedDictionary<TKey, TValue> dictionaryV40 = new ImmutableSortedDictionary<TKey, TValue>(Node.EmptyNode, 0, keyComparer, valueComparer);
+            return dictionaryV40.AddRange(this, false, true);
         }
 
         private ImmutableSortedDictionary<TKey, TValue> Wrap(Node root, int adjustedCountIfDifferentRoot)
@@ -556,7 +556,7 @@
         }
 
         [DebuggerTypeProxy(typeof(ImmutableSortedDictionary<, >.Builder.DebuggerProxy)), DebuggerDisplay("Count = {Count}")]
-        public sealed class Builder : IDictionary<TKey, TValue>, ICollection<KeyValuePair<TKey, TValue>>, IReadOnlyDictionary<TKey, TValue>, IReadOnlyCollection<KeyValuePair<TKey, TValue>>, IEnumerable<KeyValuePair<TKey, TValue>>, IDictionary, ICollection, IEnumerable
+        public sealed class Builder : IDictionary<TKey, TValue>, ICollection<KeyValuePair<TKey, TValue>>, IReadOnlyDictionaryV40<TKey, TValue>, IReadOnlyCollectionV40<KeyValuePair<TKey, TValue>>, IEnumerable<KeyValuePair<TKey, TValue>>, IDictionary, ICollection, IEnumerable
         {
             private int count;
             private ImmutableSortedDictionary<TKey, TValue> immutable;
@@ -1375,7 +1375,7 @@
 
             internal static ImmutableSortedDictionary<TKey, TValue>.Node NodeTreeFromSortedDictionary(SortedDictionary<TKey, TValue> dictionary)
             {
-                Requires.NotNull<SortedDictionary<TKey, TValue>>(dictionary, "dictionary");
+                Requires.NotNull<SortedDictionary<TKey, TValue>>(dictionary, "dictionaryV40");
                 IOrderedCollection<KeyValuePair<TKey, TValue>> items = ((IEnumerable<KeyValuePair<TKey, TValue>>) dictionary).AsOrderedCollection<KeyValuePair<TKey, TValue>>();
                 return ImmutableSortedDictionary<TKey, TValue>.Node.NodeTreeFromList(items, 0, items.Count);
             }

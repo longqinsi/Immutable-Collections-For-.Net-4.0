@@ -20,6 +20,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DocumentationFile>bin\Debug\System.Collections.Immutable.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -31,6 +32,27 @@
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DocumentationFile>bin\Debug\System.Collections.Immutable.XML</DocumentationFile>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Compile Include="System\Threading\VolatileV40.cs" />
@@ -38,13 +60,13 @@
     <Reference Include="System" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Global.cs" />
-    <Compile Include="System\Collections\Generic\ireadonlycollection.cs" />
-    <Compile Include="System\Collections\Generic\ireadonlydictionary.cs" />
-    <Compile Include="System\Collections\Generic\ireadonlylist.cs" />
+    <Compile Include="System\Collections\Generic\IReadOnlyCollectionV40.cs" />
+    <Compile Include="System\Collections\Generic\IReadOnlyDictionaryV40.cs" />
+    <Compile Include="System\Collections\Generic\IReadOnlyListV40.cs" />
     <Compile Include="System\Collections\Immutable\DictionaryEnumerator!2.cs" />
     <Compile Include="System\Collections\Immutable\IImmutableDictionaryInternal!2.cs" />
     <Compile Include="System\Collections\Immutable\IImmutableDictionary!2.cs" />
-    <Compile Include="System\Collections\Generic\IHashKeyCollection!1.cs" />
+    <Compile Include="System\Collections\Generic\IHashKeyCollectionV40!1.cs" />
     <Compile Include="System\Collections\Immutable\ImmutableDictionary!2.cs" />
     <Compile Include="System\Collections\Immutable\ImmutableInterlocked.cs" />
     <Compile Include="System\Collections\Immutable\ImmutableStack.cs" />
@@ -59,7 +81,7 @@
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
     <Compile Include="System\Collections\Immutable\ImmutableList.cs" />
-    <Compile Include="System\Collections\Generic\ISortKeyCollection!1.cs" />
+    <Compile Include="System\Collections\Generic\ISortKeyCollectionV40!1.cs" />
     <Compile Include="System\Collections\Immutable\KeysOrValuesCollectionAccessor!3.cs" />
     <Compile Include="System\Collections\Immutable\KeysCollectionAccessor!2.cs" />
     <Compile Include="System\Collections\Immutable\ValuesCollectionAccessor!2.cs" />

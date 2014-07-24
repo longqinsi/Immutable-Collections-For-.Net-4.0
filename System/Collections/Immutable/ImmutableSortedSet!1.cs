@@ -13,7 +13,7 @@
     using Validation;
 
     [DebuggerDisplay("Count = {Count}"), DebuggerTypeProxy(typeof(ImmutableSortedSet<>.DebuggerProxy))]
-    public sealed class ImmutableSortedSet<T> : IImmutableSet<T>, ISortKeyCollection<T>, IReadOnlyList<T>, IReadOnlyCollection<T>, IList<T>, ISet<T>, ICollection<T>, IEnumerable<T>, IList, ICollection, IEnumerable
+    public sealed class ImmutableSortedSet<T> : IImmutableSet<T>, ISortKeyCollectionV40<T>, IReadOnlyListV40<T>, IReadOnlyCollectionV40<T>, IList<T>, ISet<T>, ICollection<T>, IEnumerable<T>, IList, ICollection, IEnumerable
     {
         private readonly IComparer<T> comparer;
         public static readonly ImmutableSortedSet<T> Empty;
@@ -623,7 +623,7 @@
         }
 
         [DebuggerDisplay("Count = {Count}"), DebuggerTypeProxy(typeof(ImmutableSortedSet<>.Builder.DebuggerProxy))]
-        public sealed class Builder : ISortKeyCollection<T>, IReadOnlyCollection<T>, ISet<T>, ICollection<T>, IEnumerable<T>, ICollection, IEnumerable
+        public sealed class Builder : ISortKeyCollectionV40<T>, IReadOnlyCollectionV40<T>, ISet<T>, ICollection<T>, IEnumerable<T>, ICollection, IEnumerable
         {
             private IComparer<T> comparer;
             private ImmutableSortedSet<T> immutable;

@@ -66,10 +66,10 @@
         public static ImmutableSortedDictionary<TKey, TValue> ToImmutableSortedDictionary<TKey, TValue>(this IEnumerable<KeyValuePair<TKey, TValue>> source, IComparer<TKey> keyComparer, IEqualityComparer<TValue> valueComparer)
         {
             Requires.NotNull<IEnumerable<KeyValuePair<TKey, TValue>>>(source, "source");
-            ImmutableSortedDictionary<TKey, TValue> dictionary = source as ImmutableSortedDictionary<TKey, TValue>;
-            if (dictionary != null)
+            ImmutableSortedDictionary<TKey, TValue> dictionaryV40 = source as ImmutableSortedDictionary<TKey, TValue>;
+            if (dictionaryV40 != null)
             {
-                return dictionary.WithComparers(keyComparer, valueComparer);
+                return dictionaryV40.WithComparers(keyComparer, valueComparer);
             }
             return ImmutableSortedDictionary<TKey, TValue>.Empty.WithComparers(keyComparer, valueComparer).AddRange(source);
         }

@@ -60,17 +60,17 @@
             return ImmutableDictionary<TKey, TValue>.Empty.WithComparers(keyComparer, valueComparer).AddRange(items);
         }
 
-        public static TValue GetValueOrDefault<TKey, TValue>(this IImmutableDictionary<TKey, TValue> dictionary, TKey key)
+        public static TValue GetValueOrDefault<TKey, TValue>(this IImmutableDictionary<TKey, TValue> dictionaryV40, TKey key)
         {
-            return dictionary.GetValueOrDefault<TKey, TValue>(key, default(TValue));
+            return dictionaryV40.GetValueOrDefault<TKey, TValue>(key, default(TValue));
         }
 
-        public static TValue GetValueOrDefault<TKey, TValue>(this IImmutableDictionary<TKey, TValue> dictionary, TKey key, TValue defaultValue)
+        public static TValue GetValueOrDefault<TKey, TValue>(this IImmutableDictionary<TKey, TValue> dictionaryV40, TKey key, TValue defaultValue)
         {
             TValue local;
-            Requires.NotNull<IImmutableDictionary<TKey, TValue>>(dictionary, "dictionary");
+            Requires.NotNull<IImmutableDictionary<TKey, TValue>>(dictionaryV40, "dictionaryV40");
             Requires.NotNullAllowStructs<TKey>(key, "key");
-            if (dictionary.TryGetValue(key, out local))
+            if (dictionaryV40.TryGetValue(key, out local))
             {
                 return local;
             }
@@ -97,10 +97,10 @@
         public static ImmutableDictionary<TKey, TValue> ToImmutableDictionary<TKey, TValue>(this IEnumerable<KeyValuePair<TKey, TValue>> source, IEqualityComparer<TKey> keyComparer, IEqualityComparer<TValue> valueComparer)
         {
             Requires.NotNull<IEnumerable<KeyValuePair<TKey, TValue>>>(source, "source");
-            ImmutableDictionary<TKey, TValue> dictionary = source as ImmutableDictionary<TKey, TValue>;
-            if (dictionary != null)
+            ImmutableDictionary<TKey, TValue> dictionaryV40 = source as ImmutableDictionary<TKey, TValue>;
+            if (dictionaryV40 != null)
             {
-                return dictionary.WithComparers(keyComparer, valueComparer);
+                return dictionaryV40.WithComparers(keyComparer, valueComparer);
             }
             return ImmutableDictionary<TKey, TValue>.Empty.WithComparers(keyComparer, valueComparer).AddRange(source);
         }

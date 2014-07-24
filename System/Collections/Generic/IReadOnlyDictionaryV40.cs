@@ -5,7 +5,7 @@
 // ==--==
 /*============================================================
 **
-** Interface:  IReadOnlyDictionary<TKey, TValue>
+** Interface:  IReadOnlyDictionaryV40<TKey, TValue>
 ** 
 ** <OWNER>[....]</OWNER>
 **
@@ -17,11 +17,11 @@ using System.Diagnostics.Contracts;
 
 namespace System.Collections.Generic
 {
-    // Provides a read-only view of a generic dictionary.
+    // Provides a read-only view of a generic dictionaryV40.
 #if CONTRACTS_FULL
     [ContractClass(typeof(IReadOnlyDictionaryContract<,>))]
 #endif
-    public interface IReadOnlyDictionary<TKey, TValue> : IReadOnlyCollection<KeyValuePair<TKey, TValue>>
+    public interface IReadOnlyDictionaryV40<TKey, TValue> : IReadOnlyCollectionV40<KeyValuePair<TKey, TValue>>
     {
         bool ContainsKey(TKey key);
         bool TryGetValue(TKey key, out TValue value);
@@ -32,33 +32,33 @@ namespace System.Collections.Generic
     }
 
 #if CONTRACTS_FULL
-    [ContractClassFor(typeof(IReadOnlyDictionary<,>))]
-    internal abstract class IReadOnlyDictionaryContract<TKey, TValue> : IReadOnlyDictionary<TKey, TValue>
+    [ContractClassFor(typeof(IReadOnlyDictionaryV40<,>))]
+    internal abstract class IReadOnlyDictionaryContract<TKey, TValue> : IReadOnlyDictionaryV40<TKey, TValue>
     {
-        bool IReadOnlyDictionary<TKey, TValue>.ContainsKey(TKey key)
+        bool IReadOnlyDictionaryV40<TKey, TValue>.ContainsKey(TKey key)
         {
             return default(bool);
         }
 
-        bool IReadOnlyDictionary<TKey, TValue>.TryGetValue(TKey key, out TValue value)
+        bool IReadOnlyDictionaryV40<TKey, TValue>.TryGetValue(TKey key, out TValue value)
         {
             value = default(TValue);
             return default(bool);
         }
 
-        TValue IReadOnlyDictionary<TKey, TValue>.this[TKey key]
+        TValue IReadOnlyDictionaryV40<TKey, TValue>.this[TKey key]
         {
             get { return default(TValue); }
         }
 
-        IEnumerable<TKey> IReadOnlyDictionary<TKey, TValue>.Keys {
+        IEnumerable<TKey> IReadOnlyDictionaryV40<TKey, TValue>.Keys {
             get {
                 Contract.Ensures(Contract.Result<IEnumerable<TKey>>() != null);
                 return default(IEnumerable<TKey>);
             }
         }
 
-        IEnumerable<TValue> IReadOnlyDictionary<TKey, TValue>.Values {
+        IEnumerable<TValue> IReadOnlyDictionaryV40<TKey, TValue>.Values {
             get {
                 Contract.Ensures(Contract.Result<IEnumerable<TValue>>() != null);
                 return default(IEnumerable<TValue>);
@@ -70,7 +70,7 @@ namespace System.Collections.Generic
             return default(IEnumerator<KeyValuePair<TKey, TValue>>);
         }
 
-        int IReadOnlyCollection<KeyValuePair<TKey, TValue>>.Count {
+        int IReadOnlyCollectionV40<KeyValuePair<TKey, TValue>>.Count {
             get {
                 return default(int);
             }

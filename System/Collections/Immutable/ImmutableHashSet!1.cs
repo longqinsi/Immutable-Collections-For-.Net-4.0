@@ -11,7 +11,7 @@ namespace System.Collections.Immutable
 {
     [DebuggerDisplay("Count = {Count}")]
     [DebuggerTypeProxy(typeof(ImmutableHashSet<>.DebuggerProxy))]
-    public sealed class ImmutableHashSet<T> : IImmutableSet<T>, IHashKeyCollection<T>, IReadOnlyCollection<T>, ISet<T>, ICollection<T>, IEnumerable<T>, ICollection, IEnumerable
+    public sealed class ImmutableHashSet<T> : IImmutableSet<T>, IHashKeyCollectionV40<T>, IReadOnlyCollectionV40<T>, ISet<T>, ICollection<T>, IEnumerable<T>, ICollection, IEnumerable
     {
         public readonly static ImmutableHashSet<T> Empty;
 
@@ -697,7 +697,7 @@ namespace System.Collections.Immutable
         }
 
         [DebuggerDisplay("Count = {Count}")]
-        public sealed class Builder : IReadOnlyCollection<T>, ISet<T>, ICollection<T>, IEnumerable<T>, IEnumerable
+        public sealed class Builder : IReadOnlyCollectionV40<T>, ISet<T>, ICollection<T>, IEnumerable<T>, IEnumerable
         {
             private ImmutableSortedDictionary<Int32, ImmutableHashSet<T>.HashBucket>.Node root;
 

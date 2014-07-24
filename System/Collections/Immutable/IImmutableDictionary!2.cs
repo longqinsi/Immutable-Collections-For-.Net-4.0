@@ -5,7 +5,7 @@
     using System.Collections.Generic;
     using System.Runtime.InteropServices;
 
-    public interface IImmutableDictionary<TKey, TValue> : IReadOnlyDictionary<TKey, TValue>, IReadOnlyCollection<KeyValuePair<TKey, TValue>>, IEnumerable<KeyValuePair<TKey, TValue>>, IEnumerable
+    public interface IImmutableDictionary<TKey, TValue> : IReadOnlyDictionaryV40<TKey, TValue>, IReadOnlyCollectionV40<KeyValuePair<TKey, TValue>>, IEnumerable<KeyValuePair<TKey, TValue>>, IEnumerable
     {
         IImmutableDictionary<TKey, TValue> Add(TKey key, TValue value);
         IImmutableDictionary<TKey, TValue> AddRange(IEnumerable<KeyValuePair<TKey, TValue>> pairs);
