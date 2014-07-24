@@ -100,7 +100,6 @@
                 return this.sequence.GetEnumerator();
             }
 
-            //[ExcludeFromCodeCoverage]
             IEnumerator IEnumerable.GetEnumerator()
             {
                 return (IEnumerator) this.GetEnumerator();

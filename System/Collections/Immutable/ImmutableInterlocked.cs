@@ -14,7 +14,7 @@
             bool flag;
             Requires.NotNull<Func<TKey, TValue>>(addValueFactory, "addValueFactory");
             Requires.NotNull<Func<TKey, TValue, TValue>>(updateValueFactory, "updateValueFactory");
-            ImmutableDictionary<TKey, TValue> dictionary = Volatile.Read<ImmutableDictionary<TKey, TValue>>(ref location);
+            ImmutableDictionary<TKey, TValue> dictionary = VolatileV40.Read<ImmutableDictionary<TKey, TValue>>(ref location);
             do
             {
                 TValue local2;
@@ -41,7 +41,7 @@
             TValue local;
             bool flag;
             Requires.NotNull<Func<TKey, TValue, TValue>>(updateValueFactory, "updateValueFactory");
-            ImmutableDictionary<TKey, TValue> dictionary = Volatile.Read<ImmutableDictionary<TKey, TValue>>(ref location);
+            ImmutableDictionary<TKey, TValue> dictionary = VolatileV40.Read<ImmutableDictionary<TKey, TValue>>(ref location);
             do
             {
                 TValue local2;
@@ -66,7 +66,7 @@
         public static void Enqueue<T>(ref ImmutableQueue<T> location, T value)
         {
             bool flag;
-            ImmutableQueue<T> queue = Volatile.Read<ImmutableQueue<T>>(ref location);
+            ImmutableQueue<T> queue = VolatileV40.Read<ImmutableQueue<T>>(ref location);
             do
             {
                 Requires.NotNull<ImmutableQueue<T>>(queue, "location");
@@ -82,7 +82,7 @@
         {
             TValue local;
             Requires.NotNull<Func<TKey, TValue>>(valueFactory, "valueFactory");
-            ImmutableDictionary<TKey, TValue> dictionary = Volatile.Read<ImmutableDictionary<TKey, TValue>>(ref location);
+            ImmutableDictionary<TKey, TValue> dictionary = VolatileV40.Read<ImmutableDictionary<TKey, TValue>>(ref location);
             Requires.NotNull<ImmutableDictionary<TKey, TValue>>(dictionary, "location");
             if (dictionary.TryGetValue(key, out local))
             {
@@ -95,7 +95,7 @@
         public static TValue GetOrAdd<TKey, TValue>(ref ImmutableDictionary<TKey, TValue> location, TKey key, TValue value)
         {
             bool flag;
-            ImmutableDictionary<TKey, TValue> dictionary = Volatile.Read<ImmutableDictionary<TKey, TValue>>(ref location);
+            ImmutableDictionary<TKey, TValue> dictionary = VolatileV40.Read<ImmutableDictionary<TKey, TValue>>(ref location);
             do
             {
                 TValue local;
@@ -117,7 +117,7 @@
         {
             TValue local;
             Requires.NotNull<Func<TKey, TArg, TValue>>(valueFactory, "valueFactory");
-            ImmutableDictionary<TKey, TValue> dictionary = Volatile.Read<ImmutableDictionary<TKey, TValue>>(ref location);
+            ImmutableDictionary<TKey, TValue> dictionary = VolatileV40.Read<ImmutableDictionary<TKey, TValue>>(ref location);
             Requires.NotNull<ImmutableDictionary<TKey, TValue>>(dictionary, "location");
             if (dictionary.TryGetValue(key, out local))
             {
@@ -130,7 +130,7 @@
         public static void Push<T>(ref ImmutableStack<T> location, T value)
         {
             bool flag;
-            ImmutableStack<T> stack = Volatile.Read<ImmutableStack<T>>(ref location);
+            ImmutableStack<T> stack = VolatileV40.Read<ImmutableStack<T>>(ref location);
             do
             {
                 Requires.NotNull<ImmutableStack<T>>(stack, "location");
@@ -145,7 +145,7 @@
         public static bool TryAdd<TKey, TValue>(ref ImmutableDictionary<TKey, TValue> location, TKey key, TValue value)
         {
             bool flag;
-            ImmutableDictionary<TKey, TValue> dictionary = Volatile.Read<ImmutableDictionary<TKey, TValue>>(ref location);
+            ImmutableDictionary<TKey, TValue> dictionary = VolatileV40.Read<ImmutableDictionary<TKey, TValue>>(ref location);
             do
             {
                 Requires.NotNull<ImmutableDictionary<TKey, TValue>>(dictionary, "location");
@@ -165,7 +165,7 @@
         public static bool TryDequeue<T>(ref ImmutableQueue<T> location, out T value)
         {
             bool flag;
-            ImmutableQueue<T> queue = Volatile.Read<ImmutableQueue<T>>(ref location);
+            ImmutableQueue<T> queue = VolatileV40.Read<ImmutableQueue<T>>(ref location);
             do
             {
                 Requires.NotNull<ImmutableQueue<T>>(queue, "location");
@@ -186,7 +186,7 @@
         public static bool TryPop<T>(ref ImmutableStack<T> location, out T value)
         {
             bool flag;
-            ImmutableStack<T> stack = Volatile.Read<ImmutableStack<T>>(ref location);
+            ImmutableStack<T> stack = VolatileV40.Read<ImmutableStack<T>>(ref location);
             do
             {
                 Requires.NotNull<ImmutableStack<T>>(stack, "location");
@@ -207,7 +207,7 @@
         public static bool TryRemove<TKey, TValue>(ref ImmutableDictionary<TKey, TValue> location, TKey key, out TValue value)
         {
             bool flag;
-            ImmutableDictionary<TKey, TValue> dictionary = Volatile.Read<ImmutableDictionary<TKey, TValue>>(ref location);
+            ImmutableDictionary<TKey, TValue> dictionary = VolatileV40.Read<ImmutableDictionary<TKey, TValue>>(ref location);
             do
             {
                 Requires.NotNull<ImmutableDictionary<TKey, TValue>>(dictionary, "location");
@@ -228,7 +228,7 @@
         {
             bool flag;
             EqualityComparer<TValue> comparer = EqualityComparer<TValue>.Default;
-            ImmutableDictionary<TKey, TValue> dictionary = Volatile.Read<ImmutableDictionary<TKey, TValue>>(ref location);
+            ImmutableDictionary<TKey, TValue> dictionary = VolatileV40.Read<ImmutableDictionary<TKey, TValue>>(ref location);
             do
             {
                 TValue local;

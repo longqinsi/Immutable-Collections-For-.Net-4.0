@@ -33,7 +33,7 @@
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <Compile Include="System\Threading\Volatile.cs" />
+    <Compile Include="System\Threading\VolatileV40.cs" />
     <Compile Include="Validation\ValidationStrings.cs" />
     <Reference Include="System" />
     <Compile Include="AssemblyInfo.cs" />
@@ -58,7 +58,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
-    <Compile Include="System\Diagnostics\CodeAnalysis\ExcludeFromCodeCoverageAttribute.cs" />
     <Compile Include="System\Collections\Immutable\ImmutableList.cs" />
     <Compile Include="System\Collections\Generic\ISortKeyCollection!1.cs" />
     <Compile Include="System\Collections\Immutable\KeysOrValuesCollectionAccessor!3.cs" />
@@ -96,5 +95,8 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ValidationStrings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="System\Diagnostics\" />
   </ItemGroup>
 </Project>

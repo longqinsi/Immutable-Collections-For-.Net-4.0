@@ -238,7 +238,6 @@
             throw new NotSupportedException();
         }
 
-        //[ExcludeFromCodeCoverage]
         IEnumerator<KeyValuePair<TKey, TValue>> IEnumerable<KeyValuePair<TKey, TValue>>.GetEnumerator()
         {
             return this.GetEnumerator();
@@ -274,19 +273,16 @@
             throw new NotSupportedException();
         }
 
-        //[ExcludeFromCodeCoverage]
         IEnumerator IEnumerable.GetEnumerator()
         {
             return this.GetEnumerator();
         }
 
-        //[ExcludeFromCodeCoverage]
         IImmutableDictionary<TKey, TValue> IImmutableDictionary<TKey, TValue>.Add(TKey key, TValue value)
         {
             return this.Add(key, value);
         }
 
-        //[ExcludeFromCodeCoverage]
         IImmutableDictionary<TKey, TValue> IImmutableDictionary<TKey, TValue>.AddRange(IEnumerable<KeyValuePair<TKey, TValue>> pairs)
         {
             return this.AddRange(pairs);
@@ -297,19 +293,16 @@
             return this.Clear();
         }
 
-        //[ExcludeFromCodeCoverage]
         IImmutableDictionary<TKey, TValue> IImmutableDictionary<TKey, TValue>.Remove(TKey key)
         {
             return this.Remove(key);
         }
 
-        //[ExcludeFromCodeCoverage]
         IImmutableDictionary<TKey, TValue> IImmutableDictionary<TKey, TValue>.RemoveRange(IEnumerable<TKey> keys)
         {
             return this.RemoveRange(keys);
         }
 
-        //[ExcludeFromCodeCoverage]
         IImmutableDictionary<TKey, TValue> IImmutableDictionary<TKey, TValue>.SetItem(TKey key, TValue value)
         {
             return this.SetItem(key, value);
@@ -946,7 +939,6 @@
                 }
             }
 
-            //[ExcludeFromCodeCoverage]
             private class DebuggerProxy
             {
                 private KeyValuePair<TKey, TValue>[] contents;
@@ -973,7 +965,6 @@
             }
         }
 
-        //[ExcludeFromCodeCoverage]
         private class DebuggerProxy
         {
             private KeyValuePair<TKey, TValue>[] contents;

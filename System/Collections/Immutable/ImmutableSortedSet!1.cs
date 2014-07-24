@@ -279,7 +279,6 @@
             throw new NotSupportedException();
         }
 
-        //[ExcludeFromCodeCoverage]
         IEnumerator<T> IEnumerable<T>.GetEnumerator()
         {
             return this.GetEnumerator();
@@ -325,7 +324,6 @@
             this.root.CopyTo(array, index);
         }
 
-        //[ExcludeFromCodeCoverage]
         IEnumerator IEnumerable.GetEnumerator()
         {
             return this.GetEnumerator();
@@ -366,43 +364,36 @@
             throw new NotSupportedException();
         }
 
-        //[ExcludeFromCodeCoverage]
         IImmutableSet<T> IImmutableSet<T>.Add(T value)
         {
             return this.Add(value);
         }
 
-        //[ExcludeFromCodeCoverage]
         IImmutableSet<T> IImmutableSet<T>.Clear()
         {
             return this.Clear();
         }
 
-        //[ExcludeFromCodeCoverage]
         IImmutableSet<T> IImmutableSet<T>.Except(IEnumerable<T> other)
         {
             return this.Except(other);
         }
 
-        //[ExcludeFromCodeCoverage]
         IImmutableSet<T> IImmutableSet<T>.Intersect(IEnumerable<T> other)
         {
             return this.Intersect(other);
         }
 
-        //[ExcludeFromCodeCoverage]
         IImmutableSet<T> IImmutableSet<T>.Remove(T value)
         {
             return this.Remove(value);
         }
 
-        //[ExcludeFromCodeCoverage]
         IImmutableSet<T> IImmutableSet<T>.SymmetricExcept(IEnumerable<T> other)
         {
             return this.SymmetricExcept(other);
         }
 
-        //[ExcludeFromCodeCoverage]
         IImmutableSet<T> IImmutableSet<T>.Union(IEnumerable<T> other)
         {
             return this.Union(other);
@@ -891,7 +882,6 @@
                 }
             }
 
-            //[ExcludeFromCodeCoverage]
             private class DebuggerProxy
             {
                 private T[] contents;
@@ -918,7 +908,6 @@
             }
         }
 
-        //[ExcludeFromCodeCoverage]
         private class DebuggerProxy
         {
             private T[] contents;
@@ -1471,13 +1460,11 @@
                 return this.left.Search(key, comparer);
             }
 
-            //[ExcludeFromCodeCoverage]
             IEnumerator<T> IEnumerable<T>.GetEnumerator()
             {
                 return this.GetEnumerator();
             }
 
-            //[ExcludeFromCodeCoverage]
             IEnumerator IEnumerable.GetEnumerator()
             {
                 return this.GetEnumerator();

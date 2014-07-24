@@ -499,43 +499,36 @@ namespace System.Collections.Immutable
             throw new NotSupportedException();
         }
 
-        //[ExcludeFromCodeCoverage]
         IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
             return this.GetEnumerator();
         }
 
-        //[ExcludeFromCodeCoverage]
         IImmutableDictionary<TKey, TValue> System.Collections.Immutable.IImmutableDictionary<TKey, TValue>.Add(TKey key, TValue value)
         {
             return this.Add(key, value);
         }
 
-        //[ExcludeFromCodeCoverage]
         IImmutableDictionary<TKey, TValue> System.Collections.Immutable.IImmutableDictionary<TKey, TValue>.AddRange(IEnumerable<KeyValuePair<TKey, TValue>> pairs)
         {
             return this.AddRange(pairs);
         }
 
-        //[ExcludeFromCodeCoverage]
         IImmutableDictionary<TKey, TValue> System.Collections.Immutable.IImmutableDictionary<TKey, TValue>.Clear()
         {
             return this.Clear();
         }
 
-        //[ExcludeFromCodeCoverage]
         IImmutableDictionary<TKey, TValue> System.Collections.Immutable.IImmutableDictionary<TKey, TValue>.Remove(TKey key)
         {
             return this.Remove(key);
         }
 
-        //[ExcludeFromCodeCoverage]
         IImmutableDictionary<TKey, TValue> System.Collections.Immutable.IImmutableDictionary<TKey, TValue>.RemoveRange(IEnumerable<TKey> keys)
         {
             return this.RemoveRange(keys);
         }
 
-        //[ExcludeFromCodeCoverage]
         IImmutableDictionary<TKey, TValue> System.Collections.Immutable.IImmutableDictionary<TKey, TValue>.SetItem(TKey key, TValue value)
         {
             return this.SetItem(key, value);
@@ -1064,7 +1057,6 @@ namespace System.Collections.Immutable
                 return ImmutableDictionary<TKey, TValue>.TryGetValue(key, this.Origin, out value);
             }
 
-            //[ExcludeFromCodeCoverage]
             private class DebuggerProxy
             {
                 private readonly ImmutableDictionary<TKey, TValue>.Builder map;
@@ -1193,7 +1185,6 @@ namespace System.Collections.Immutable
             }
         }
 
-        //[ExcludeFromCodeCoverage]
         private class DebuggerProxy
         {
             private readonly ImmutableDictionary<TKey, TValue> map;

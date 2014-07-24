@@ -444,13 +444,11 @@
             throw new NotSupportedException();
         }
 
-        //[ExcludeFromCodeCoverage]
         IImmutableList<T> IImmutableList<T>.Add(T value)
         {
             return this.Add(value);
         }
 
-        //[ExcludeFromCodeCoverage]
         IImmutableList<T> IImmutableList<T>.AddRange(IEnumerable<T> items)
         {
             return this.AddRange(items);
@@ -461,55 +459,46 @@
             return this.Clear();
         }
 
-        //[ExcludeFromCodeCoverage]
         IImmutableList<T> IImmutableList<T>.Insert(int index, T item)
         {
             return this.Insert(index, item);
         }
 
-        //[ExcludeFromCodeCoverage]
         IImmutableList<T> IImmutableList<T>.InsertRange(int index, IEnumerable<T> items)
         {
             return this.InsertRange(index, items);
         }
 
-        //[ExcludeFromCodeCoverage]
         IImmutableList<T> IImmutableList<T>.Remove(T value, IEqualityComparer<T> equalityComparer)
         {
             return this.Remove(value, equalityComparer);
         }
 
-        //[ExcludeFromCodeCoverage]
         IImmutableList<T> IImmutableList<T>.RemoveAll(Predicate<T> match)
         {
             return this.RemoveAll(match);
         }
 
-        //[ExcludeFromCodeCoverage]
         IImmutableList<T> IImmutableList<T>.RemoveAt(int index)
         {
             return this.RemoveAt(index);
         }
 
-        //[ExcludeFromCodeCoverage]
         IImmutableList<T> IImmutableList<T>.RemoveRange(IEnumerable<T> items, IEqualityComparer<T> equalityComparer)
         {
             return this.RemoveRange(items, equalityComparer);
         }
 
-        //[ExcludeFromCodeCoverage]
         IImmutableList<T> IImmutableList<T>.RemoveRange(int index, int count)
         {
             return this.RemoveRange(index, count);
         }
 
-        //[ExcludeFromCodeCoverage]
         IImmutableList<T> IImmutableList<T>.Replace(T oldValue, T newValue, IEqualityComparer<T> equalityComparer)
         {
             return this.Replace(oldValue, newValue, equalityComparer);
         }
 
-        //[ExcludeFromCodeCoverage]
         IImmutableList<T> IImmutableList<T>.SetItem(int index, T value)
         {
             return this.SetItem(index, value);
@@ -1126,7 +1115,6 @@
             }
         }
 
-        //[ExcludeFromCodeCoverage]
         private class DebuggerProxy
         {
             private T[] cachedContents;
@@ -2018,13 +2006,11 @@
                 return ImmutableList<T>.Node.NodeTreeFromList(array.AsOrderedCollection<T>(), 0, this.Count);
             }
 
-            //[ExcludeFromCodeCoverage]
             IEnumerator<T> IEnumerable<T>.GetEnumerator()
             {
                 return this.GetEnumerator();
             }
 
-            //[ExcludeFromCodeCoverage]
             IEnumerator IEnumerable.GetEnumerator()
             {
                 return this.GetEnumerator();

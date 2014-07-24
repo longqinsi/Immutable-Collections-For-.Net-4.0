@@ -123,7 +123,6 @@
             }
         }
 
-        //[ExcludeFromCodeCoverage]
         private class DebuggerProxy
         {
             private T[] contents;

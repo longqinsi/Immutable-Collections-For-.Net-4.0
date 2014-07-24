@@ -5,10 +5,8 @@ using System.Security;
 
 namespace System.Threading
 {
-    //[__DynamicallyInvokable]
-    public static class Volatile
+    public static class VolatileV40
     {
-        //[__DynamicallyInvokable]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
         public static bool Read(ref bool location)
@@ -18,7 +16,6 @@ namespace System.Threading
             return flag;
         }
 
-        //[__DynamicallyInvokable]
         [CLSCompliant(false)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
@@ -29,7 +26,6 @@ namespace System.Threading
             return num;
         }
 
-        //[__DynamicallyInvokable]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
         public static byte Read(ref byte location)
@@ -39,7 +35,6 @@ namespace System.Threading
             return num;
         }
 
-        //[__DynamicallyInvokable]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
         public static short Read(ref short location)
@@ -49,7 +44,6 @@ namespace System.Threading
             return num;
         }
 
-        //[__DynamicallyInvokable]
         [CLSCompliant(false)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
@@ -60,7 +54,6 @@ namespace System.Threading
             return num;
         }
 
-        //[__DynamicallyInvokable]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
         public static int Read(ref int location)
@@ -70,7 +63,6 @@ namespace System.Threading
             return num;
         }
 
-        //[__DynamicallyInvokable]
         [CLSCompliant(false)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
@@ -81,29 +73,12 @@ namespace System.Threading
             return num;
         }
 
-        //[__DynamicallyInvokable]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
         public static long Read(ref long location)
         {
             return Interlocked.CompareExchange(ref location, (long)0, (long)0);
         }
-
-        ////[__DynamicallyInvokable]
-        //[CLSCompliant(false)]
-        //[ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-        //[SecuritySafeCritical]
-        //[TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
-        //public static ulong Read(ref ulong location)
-        //{
-        //    unsafe
-        //    {
-        //        fixed (long* numPointer = location)
-        //        {
-        //            return (ulong)Interlocked.CompareExchange(numPointer, (long)0, (long)0);
-        //        }
-        //    }
-        //}
 
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
@@ -124,7 +99,6 @@ namespace System.Threading
             return uIntPtr;
         }
 
-        //[__DynamicallyInvokable]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
         public static float Read(ref float location)
@@ -134,7 +108,6 @@ namespace System.Threading
             return single;
         }
 
-        //[__DynamicallyInvokable]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
         public static double Read(ref double location)
@@ -142,7 +115,6 @@ namespace System.Threading
             return Interlocked.CompareExchange(ref location, 0, 0);
         }
 
-        //[__DynamicallyInvokable]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [SecuritySafeCritical]
         [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
@@ -154,7 +126,6 @@ namespace System.Threading
             return t;
         }
 
-        //[__DynamicallyInvokable]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
         public static void Write(ref bool location, bool value)
@@ -163,7 +134,6 @@ namespace System.Threading
             location = value;
         }
 
-        //[__DynamicallyInvokable]
         [CLSCompliant(false)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
@@ -173,7 +143,6 @@ namespace System.Threading
             location = value;
         }
 
-        //[__DynamicallyInvokable]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
         public static void Write(ref byte location, byte value)
@@ -182,7 +151,6 @@ namespace System.Threading
             location = value;
         }
 
-        //[__DynamicallyInvokable]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
         public static void Write(ref short location, short value)
@@ -191,7 +159,6 @@ namespace System.Threading
             location = value;
         }
 
-        //[__DynamicallyInvokable]
         [CLSCompliant(false)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
@@ -201,7 +168,6 @@ namespace System.Threading
             location = value;
         }
 
-        //[__DynamicallyInvokable]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
         public static void Write(ref int location, int value)
@@ -210,7 +176,6 @@ namespace System.Threading
             location = value;
         }
 
-        //[__DynamicallyInvokable]
         [CLSCompliant(false)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
@@ -220,29 +185,12 @@ namespace System.Threading
             location = value;
         }
 
-        //[__DynamicallyInvokable]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
         public static void Write(ref long location, long value)
         {
             Interlocked.Exchange(ref location, value);
         }
-
-        ////[__DynamicallyInvokable]
-        //[CLSCompliant(false)]
-        //[ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-        //[SecuritySafeCritical]
-        //[TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
-        //public static void Write(ref ulong location, ulong value)
-        //{
-        //    unsafe
-        //    {
-        //        fixed (ulong* numPointer = location)
-        //        {
-        //            Interlocked.Exchange(numPointer, (long)value);
-        //        }
-        //    }
-        //}
 
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
@@ -261,7 +209,6 @@ namespace System.Threading
             location = value;
         }
 
-        //[__DynamicallyInvokable]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
         public static void Write(ref float location, float value)
@@ -270,7 +217,6 @@ namespace System.Threading
             location = value;
         }
 
-        //[__DynamicallyInvokable]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
         public static void Write(ref double location, double value)
@@ -278,7 +224,6 @@ namespace System.Threading
             Interlocked.Exchange(ref location, value);
         }
 
-        //[__DynamicallyInvokable]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [SecuritySafeCritical]
         [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]

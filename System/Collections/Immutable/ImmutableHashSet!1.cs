@@ -560,43 +560,36 @@ namespace System.Collections.Immutable
             return this.GetEnumerator();
         }
 
-        //[ExcludeFromCodeCoverage]
         IImmutableSet<T> System.Collections.Immutable.IImmutableSet<T>.Add(T item)
         {
             return this.Add(item);
         }
 
-        //[ExcludeFromCodeCoverage]
         IImmutableSet<T> System.Collections.Immutable.IImmutableSet<T>.Clear()
         {
             return this.Clear();
         }
 
-        //[ExcludeFromCodeCoverage]
         IImmutableSet<T> System.Collections.Immutable.IImmutableSet<T>.Except(IEnumerable<T> other)
         {
             return this.Except(other);
         }
 
-        //[ExcludeFromCodeCoverage]
         IImmutableSet<T> System.Collections.Immutable.IImmutableSet<T>.Intersect(IEnumerable<T> other)
         {
             return this.Intersect(other);
         }
 
-        //[ExcludeFromCodeCoverage]
         IImmutableSet<T> System.Collections.Immutable.IImmutableSet<T>.Remove(T item)
         {
             return this.Remove(item);
         }
 
-        //[ExcludeFromCodeCoverage]
         IImmutableSet<T> System.Collections.Immutable.IImmutableSet<T>.SymmetricExcept(IEnumerable<T> other)
         {
             return this.SymmetricExcept(other);
         }
 
-        //[ExcludeFromCodeCoverage]
         IImmutableSet<T> System.Collections.Immutable.IImmutableSet<T>.Union(IEnumerable<T> other)
         {
             return this.Union(other);
@@ -932,7 +925,6 @@ namespace System.Collections.Immutable
             FinalValue
         }
 
-        //[ExcludeFromCodeCoverage]
         private class DebuggerProxy
         {
             private readonly ImmutableHashSet<T> @set;
@@ -1375,13 +1367,11 @@ namespace System.Collections.Immutable
                 return new ImmutableHashSet<T>.Enumerator(this.root, null);
             }
 
-            //[ExcludeFromCodeCoverage]
             IEnumerator<T> System.Collections.Generic.IEnumerable<T>.GetEnumerator()
             {
                 return this.GetEnumerator();
             }
 
-            //[ExcludeFromCodeCoverage]
             IEnumerator System.Collections.IEnumerable.GetEnumerator()
             {
                 return this.GetEnumerator();
