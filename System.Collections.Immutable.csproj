@@ -52,6 +52,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>bin\Release\System.Collections.Immutable.XML</DocumentationFile>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -60,13 +61,13 @@
     <Reference Include="System" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Global.cs" />
-    <Compile Include="System\Collections\Generic\IReadOnlyCollectionV40.cs" />
-    <Compile Include="System\Collections\Generic\IReadOnlyDictionaryV40.cs" />
-    <Compile Include="System\Collections\Generic\IReadOnlyListV40.cs" />
+    <Compile Include="System\Collections\Generic\V40\IReadOnlyCollection.cs" />
+    <Compile Include="System\Collections\Generic\V40\IReadOnlyDictionary.cs" />
+    <Compile Include="System\Collections\Generic\V40\IReadOnlyList.cs" />
     <Compile Include="System\Collections\Immutable\DictionaryEnumerator!2.cs" />
     <Compile Include="System\Collections\Immutable\IImmutableDictionaryInternal!2.cs" />
     <Compile Include="System\Collections\Immutable\IImmutableDictionary!2.cs" />
-    <Compile Include="System\Collections\Generic\IHashKeyCollectionV40!1.cs" />
+    <Compile Include="System\Collections\Generic\V40\IHashKeyCollection!1.cs" />
     <Compile Include="System\Collections\Immutable\ImmutableDictionary!2.cs" />
     <Compile Include="System\Collections\Immutable\ImmutableInterlocked.cs" />
     <Compile Include="System\Collections\Immutable\ImmutableStack.cs" />
@@ -81,7 +82,7 @@
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
     <Compile Include="System\Collections\Immutable\ImmutableList.cs" />
-    <Compile Include="System\Collections\Generic\ISortKeyCollectionV40!1.cs" />
+    <Compile Include="System\Collections\Generic\V40\ISortKeyCollection!1.cs" />
     <Compile Include="System\Collections\Immutable\KeysOrValuesCollectionAccessor!3.cs" />
     <Compile Include="System\Collections\Immutable\KeysCollectionAccessor!2.cs" />
     <Compile Include="System\Collections\Immutable\ValuesCollectionAccessor!2.cs" />

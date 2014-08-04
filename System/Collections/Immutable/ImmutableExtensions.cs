@@ -1,4 +1,6 @@
-﻿namespace System.Collections.Immutable
+﻿using System.Collections.Generic.V40;
+
+namespace System.Collections.Immutable
 {
     using System;
     using System.Collections;
@@ -69,7 +71,7 @@
                 count = is3.Count;
                 return true;
             }
-            IReadOnlyCollectionV40<T> onlys = sequence as IReadOnlyCollectionV40<T>;
+            IReadOnlyCollection<T> onlys = sequence as IReadOnlyCollection<T>;
             if (onlys != null)
             {
                 count = onlys.Count;

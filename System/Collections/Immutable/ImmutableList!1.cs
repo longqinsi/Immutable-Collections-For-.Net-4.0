@@ -1,4 +1,6 @@
-﻿namespace System.Collections.Immutable
+﻿using System.Collections.Generic.V40;
+
+namespace System.Collections.Immutable
 {
     using System;
     using System.Collections;
@@ -12,7 +14,7 @@
     using Validation;
 
     [DebuggerDisplay("Count = {Count}"), DebuggerTypeProxy(typeof(ImmutableList<>.DebuggerProxy))]
-    public sealed class ImmutableList<T> : IImmutableList<T>, IList<T>, ICollection<T>, IList, ICollection, IOrderedCollection<T>, IImmutableListQueries<T>, IReadOnlyListV40<T>, IReadOnlyCollectionV40<T>, IEnumerable<T>, IEnumerable
+    public sealed class ImmutableList<T> : IImmutableList<T>, IList<T>, ICollection<T>, IList, ICollection, IOrderedCollection<T>, IImmutableListQueries<T>, IReadOnlyList<T>, IReadOnlyCollection<T>, IEnumerable<T>, IEnumerable
     {
         public static readonly ImmutableList<T> Empty;
         private readonly Node root;
@@ -653,7 +655,7 @@
         }
 
         [DebuggerDisplay("Count = {Count}"), DebuggerTypeProxy(typeof(ImmutableList<>.DebuggerProxy))]
-        public sealed class Builder : IList<T>, ICollection<T>, IList, ICollection, IOrderedCollection<T>, IImmutableListQueries<T>, IReadOnlyListV40<T>, IReadOnlyCollectionV40<T>, IEnumerable<T>, IEnumerable
+        public sealed class Builder : IList<T>, ICollection<T>, IList, ICollection, IOrderedCollection<T>, IImmutableListQueries<T>, IReadOnlyList<T>, IReadOnlyCollection<T>, IEnumerable<T>, IEnumerable
         {
             private ImmutableList<T> immutable;
             private ImmutableList<T>.Node root;

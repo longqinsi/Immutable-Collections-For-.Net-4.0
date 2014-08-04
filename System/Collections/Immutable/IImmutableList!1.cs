@@ -1,10 +1,12 @@
-﻿namespace System.Collections.Immutable
+﻿using System.Collections.Generic.V40;
+
+namespace System.Collections.Immutable
 {
     using System;
     using System.Collections;
     using System.Collections.Generic;
 
-    public interface IImmutableList<T> : IReadOnlyListV40<T>, IReadOnlyCollectionV40<T>, IEnumerable<T>, IEnumerable
+    public interface IImmutableList<T> : IReadOnlyList<T>, IReadOnlyCollection<T>, IEnumerable<T>, IEnumerable
     {
         IImmutableList<T> Add(T value);
         IImmutableList<T> AddRange(IEnumerable<T> items);

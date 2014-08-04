@@ -15,13 +15,13 @@
 using System;
 using System.Diagnostics.Contracts;
 
-namespace System.Collections.Generic
+namespace System.Collections.Generic.V40
 {
     // Provides a read-only view of a generic dictionaryV40.
 #if CONTRACTS_FULL
     [ContractClass(typeof(IReadOnlyDictionaryContract<,>))]
 #endif
-    public interface IReadOnlyDictionaryV40<TKey, TValue> : IReadOnlyCollectionV40<KeyValuePair<TKey, TValue>>
+    public interface IReadOnlyDictionary<TKey, TValue> : IReadOnlyCollection<KeyValuePair<TKey, TValue>>
     {
         bool ContainsKey(TKey key);
         bool TryGetValue(TKey key, out TValue value);

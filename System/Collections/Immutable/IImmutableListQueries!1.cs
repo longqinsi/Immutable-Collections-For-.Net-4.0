@@ -1,10 +1,12 @@
-﻿namespace System.Collections.Immutable
+﻿using System.Collections.Generic.V40;
+
+namespace System.Collections.Immutable
 {
     using System;
     using System.Collections;
     using System.Collections.Generic;
 
-    internal interface IImmutableListQueries<T> : IReadOnlyListV40<T>, IReadOnlyCollectionV40<T>, IEnumerable<T>, IEnumerable
+    internal interface IImmutableListQueries<T> : IReadOnlyList<T>, IReadOnlyCollection<T>, IEnumerable<T>, IEnumerable
     {
         int BinarySearch(T item);
         int BinarySearch(T item, IComparer<T> comparer);

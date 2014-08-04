@@ -1,4 +1,6 @@
-﻿namespace System.Collections.Immutable
+﻿using System.Collections.Generic.V40;
+
+namespace System.Collections.Immutable
 {
     using System;
     using System.Collections;
@@ -13,7 +15,7 @@
     using Validation;
 
     [DebuggerTypeProxy(typeof(ImmutableSortedDictionary<, >.DebuggerProxy)), DebuggerDisplay("Count = {Count}")]
-    public sealed class ImmutableSortedDictionary<TKey, TValue> : IImmutableDictionary<TKey, TValue>, IReadOnlyDictionaryV40<TKey, TValue>, IReadOnlyCollectionV40<KeyValuePair<TKey, TValue>>, ISortKeyCollectionV40<TKey>, IDictionary<TKey, TValue>, ICollection<KeyValuePair<TKey, TValue>>, IEnumerable<KeyValuePair<TKey, TValue>>, IDictionary, ICollection, IEnumerable
+    public sealed class ImmutableSortedDictionary<TKey, TValue> : IImmutableDictionary<TKey, TValue>, IReadOnlyDictionary<TKey, TValue>, IReadOnlyCollection<KeyValuePair<TKey, TValue>>, ISortKeyCollection<TKey>, IDictionary<TKey, TValue>, ICollection<KeyValuePair<TKey, TValue>>, IEnumerable<KeyValuePair<TKey, TValue>>, IDictionary, ICollection, IEnumerable
     {
         private readonly int count;
         public static readonly ImmutableSortedDictionary<TKey, TValue> Empty;
@@ -556,7 +558,7 @@
         }
 
         [DebuggerTypeProxy(typeof(ImmutableSortedDictionary<, >.Builder.DebuggerProxy)), DebuggerDisplay("Count = {Count}")]
-        public sealed class Builder : IDictionary<TKey, TValue>, ICollection<KeyValuePair<TKey, TValue>>, IReadOnlyDictionaryV40<TKey, TValue>, IReadOnlyCollectionV40<KeyValuePair<TKey, TValue>>, IEnumerable<KeyValuePair<TKey, TValue>>, IDictionary, ICollection, IEnumerable
+        public sealed class Builder : IDictionary<TKey, TValue>, ICollection<KeyValuePair<TKey, TValue>>, IReadOnlyDictionary<TKey, TValue>, IReadOnlyCollection<KeyValuePair<TKey, TValue>>, IEnumerable<KeyValuePair<TKey, TValue>>, IDictionary, ICollection, IEnumerable
         {
             private int count;
             private ImmutableSortedDictionary<TKey, TValue> immutable;
