@@ -154,7 +154,7 @@
                 {
                     if (this.contents == null)
                     {
-                        this.contents = Enumerable.ToArray<T>(this.queue);
+                        this.contents = EnumerableV20.ToArray<T>(this.queue);
                     }
                     return this.contents;
                 }

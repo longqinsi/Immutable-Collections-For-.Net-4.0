@@ -1224,7 +1224,7 @@ namespace System.Collections.Immutable
             internal bool ContainsValue(TValue value, IEqualityComparer<TValue> valueComparer)
             {
                 Requires.NotNull<IEqualityComparer<TValue>>(valueComparer, "valueComparer");
-                return Enumerable.Contains<TValue>(this.Values, value, valueComparer);
+                return EnumerableV20.Contains<TValue>(this.Values, value, valueComparer);
             }
 
             internal void CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex, int dictionarySize)
@@ -1594,7 +1594,7 @@ namespace System.Collections.Immutable
             {
                 get
                 {
-                    return Enumerable.Select<KeyValuePair<TKey, TValue>, TKey>(this, delegate (KeyValuePair<TKey, TValue> p) {
+                    return EnumerableV20.Select<KeyValuePair<TKey, TValue>, TKey>(this, delegate (KeyValuePair<TKey, TValue> p) {
                         return p.Key;
                     });
                 }
@@ -1644,7 +1644,7 @@ namespace System.Collections.Immutable
             {
                 get
                 {
-                    return Enumerable.Select<KeyValuePair<TKey, TValue>, TValue>(this, delegate (KeyValuePair<TKey, TValue> p) {
+                    return EnumerableV20.Select<KeyValuePair<TKey, TValue>, TValue>(this, delegate (KeyValuePair<TKey, TValue> p) {
                         return p.Value;
                     });
                 }

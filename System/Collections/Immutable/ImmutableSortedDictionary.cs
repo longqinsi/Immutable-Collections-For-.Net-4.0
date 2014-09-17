@@ -89,7 +89,7 @@
             Requires.NotNull<IEnumerable<TSource>>(source, "source");
             Requires.NotNull<FuncV20<TSource, TKey>>(keySelector, "keySelector");
             Requires.NotNull<FuncV20<TSource, TValue>>(elementSelector, "elementSelector");
-            return ImmutableSortedDictionary<TKey, TValue>.Empty.WithComparers(keyComparer, valueComparer).AddRange(Enumerable.Select<TSource, KeyValuePair<TKey, TValue>>(source, delegate (TSource element) {
+            return ImmutableSortedDictionary<TKey, TValue>.Empty.WithComparers(keyComparer, valueComparer).AddRange(EnumerableV20.Select<TSource, KeyValuePair<TKey, TValue>>(source, delegate (TSource element) {
                 return new KeyValuePair<TKey, TValue>(keySelector(element), elementSelector(element));
             }));
         }

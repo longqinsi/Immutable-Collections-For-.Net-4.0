@@ -227,7 +227,7 @@ namespace System.Collections.Immutable
             Requires.NotNull<IEnumerable<T>>(other, "other");
             if (origin.Root.IsEmpty)
             {
-                return Enumerable.Any<T>(other);
+                return EnumerableV20.Any<T>(other);
             }
             HashSetV20<T> ts = new HashSetV20<T>(other, origin.EqualityComparer);
             if (origin.Count >= ts.Count)

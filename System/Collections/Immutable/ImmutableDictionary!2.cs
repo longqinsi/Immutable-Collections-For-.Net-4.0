@@ -338,7 +338,7 @@ namespace System.Collections.Immutable
 
         public Boolean ContainsValue(TValue value)
         {
-            return Enumerable.Contains<TValue>(this.Values, value, this.ValueComparer);
+            return EnumerableV20.Contains<TValue>(this.Values, value, this.ValueComparer);
         }
 
         private static ImmutableDictionary<TKey, TValue> EmptyWithComparers(ImmutableDictionary<TKey, TValue>.Comparers comparers)
@@ -729,7 +729,7 @@ namespace System.Collections.Immutable
             {
                 get
                 {
-                    return Enumerable.Select<KeyValuePair<TKey, TValue>, TKey>(Enumerable.SelectMany<ImmutableDictionary<TKey, TValue>.HashBucket, KeyValuePair<TKey, TValue>>(this.root.Values, (ImmutableDictionary<TKey, TValue>.HashBucket b) => b), ((KeyValuePair<TKey, TValue> kv) => kv.Key));
+                    return EnumerableV20.Select<KeyValuePair<TKey, TValue>, TKey>(EnumerableV20.SelectMany<ImmutableDictionary<TKey, TValue>.HashBucket, KeyValuePair<TKey, TValue>>(this.root.Values, (ImmutableDictionary<TKey, TValue>.HashBucket b) => b), ((KeyValuePair<TKey, TValue> kv) => kv.Key));
                 }
             }
 
@@ -872,7 +872,7 @@ namespace System.Collections.Immutable
             {
                 get
                 {
-                    return ImmutableExtensions.ToArray<TValue>(Enumerable.Select<KeyValuePair<TKey, TValue>, TValue>(Enumerable.SelectMany<ImmutableDictionary<TKey, TValue>.HashBucket, KeyValuePair<TKey, TValue>>(this.root.Values, (ImmutableDictionary<TKey, TValue>.HashBucket b) => b), (KeyValuePair<TKey, TValue> kv) => kv.Value), this.Count);
+                    return ImmutableExtensions.ToArray<TValue>(EnumerableV20.Select<KeyValuePair<TKey, TValue>, TValue>(EnumerableV20.SelectMany<ImmutableDictionary<TKey, TValue>.HashBucket, KeyValuePair<TKey, TValue>>(this.root.Values, (ImmutableDictionary<TKey, TValue>.HashBucket b) => b), (KeyValuePair<TKey, TValue> kv) => kv.Value), this.Count);
                 }
             }
 
@@ -936,7 +936,7 @@ namespace System.Collections.Immutable
 
             public Boolean ContainsValue(TValue value)
             {
-                return Enumerable.Contains<TValue>(this.Values, value, this.ValueComparer);
+                return EnumerableV20.Contains<TValue>(this.Values, value, this.ValueComparer);
             }
 
             public ImmutableDictionary<TKey, TValue>.Enumerator GetEnumerator()

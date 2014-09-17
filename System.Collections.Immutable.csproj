@@ -71,7 +71,7 @@
     <Compile Include="System\ExternalInvoke.cs" />
     <Compile Include="System\FuncV20.cs" />
     <Compile Include="System\IWellKnownStringEqualityComparer.cs" />
-    <Compile Include="System\Linq\Enumerable.cs" />
+    <Compile Include="System\Linq\EnumerableV20.cs" />
     <Compile Include="System\Runtime\CompilerServices\ConditionalWeakTable.cs" />
     <Compile Include="System\Runtime\CompilerServices\DependentHandle.cs" />
     <Compile Include="System\Threading\VolatileV20.cs" />

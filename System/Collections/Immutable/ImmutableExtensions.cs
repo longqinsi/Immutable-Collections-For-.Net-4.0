@@ -35,7 +35,7 @@ namespace System.Collections.Immutable
             int num;
             if (!TryGetCount<T>(sequence, out num))
             {
-                List<T> list = Enumerable.ToList<T>(sequence);
+                List<T> list = EnumerableV20.ToList<T>(sequence);
                 num = list.Count;
                 sequence = (IEnumerable<T>) list;
             }
@@ -118,7 +118,7 @@ namespace System.Collections.Immutable
                         {
                             return num;
                         }
-                        this.collection = Enumerable.ToArray<T>(this.sequence);
+                        this.collection = EnumerableV20.ToArray<T>(this.sequence);
                     }
                     return this.collection.Count;
                 }
@@ -130,7 +130,7 @@ namespace System.Collections.Immutable
                 {
                     if (this.collection == null)
                     {
-                        this.collection = Enumerable.ToArray<T>(this.sequence);
+                        this.collection = EnumerableV20.ToArray<T>(this.sequence);
                     }
                     return this.collection[index];
                 }

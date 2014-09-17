@@ -141,7 +141,7 @@
                 {
                     if (this.contents == null)
                     {
-                        this.contents = Enumerable.ToArray<T>(this.stack);
+                        this.contents = EnumerableV20.ToArray<T>(this.stack);
                     }
                     return this.contents;
                 }

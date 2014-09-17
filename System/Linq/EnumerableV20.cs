@@ -47,7 +47,7 @@ namespace System.Linq
             throw new NotImplementedException();
         }
     }
-    public static class Enumerable
+    public static class EnumerableV20
     {
         public static IEnumerable<TSource> Where<TSource>(IEnumerable<TSource> source, FuncV20<TSource, bool> predicate) {
             if (source == null) throw Error.ArgumentNull("source");
@@ -1410,43 +1410,43 @@ namespace System.Linq
         }
 
         public static int Sum<TSource>(IEnumerable<TSource> source, FuncV20<TSource, int> selector) {
-            return Enumerable.Sum(Enumerable.Select(source, selector));
+            return EnumerableV20.Sum(EnumerableV20.Select(source, selector));
         }
 
         public static int? Sum<TSource>(IEnumerable<TSource> source, FuncV20<TSource, int?> selector) {
-            return Enumerable.Sum(Enumerable.Select(source, selector));
+            return EnumerableV20.Sum(EnumerableV20.Select(source, selector));
         }
 
         public static long Sum<TSource>(IEnumerable<TSource> source, FuncV20<TSource, long> selector) {
-            return Enumerable.Sum(Enumerable.Select(source, selector));
+            return EnumerableV20.Sum(EnumerableV20.Select(source, selector));
         }
 
         public static long? Sum<TSource>(IEnumerable<TSource> source, FuncV20<TSource, long?> selector) {
-            return Enumerable.Sum(Enumerable.Select(source, selector));
+            return EnumerableV20.Sum(EnumerableV20.Select(source, selector));
         }
 
         public static float Sum<TSource>(IEnumerable<TSource> source, FuncV20<TSource, float> selector) {
-            return Enumerable.Sum(Enumerable.Select(source, selector));
+            return EnumerableV20.Sum(EnumerableV20.Select(source, selector));
         }
 
         public static float? Sum<TSource>(IEnumerable<TSource> source, FuncV20<TSource, float?> selector) {
-            return Enumerable.Sum(Enumerable.Select(source, selector));
+            return EnumerableV20.Sum(EnumerableV20.Select(source, selector));
         }
 
         public static double Sum<TSource>(IEnumerable<TSource> source, FuncV20<TSource, double> selector) {
-            return Enumerable.Sum(Enumerable.Select(source, selector));
+            return EnumerableV20.Sum(EnumerableV20.Select(source, selector));
         }
 
         public static double? Sum<TSource>(IEnumerable<TSource> source, FuncV20<TSource, double?> selector) {
-            return Enumerable.Sum(Enumerable.Select(source, selector));
+            return EnumerableV20.Sum(EnumerableV20.Select(source, selector));
         }
 
         public static decimal Sum<TSource>(IEnumerable<TSource> source, FuncV20<TSource, decimal> selector) {
-            return Enumerable.Sum(Enumerable.Select(source, selector));
+            return EnumerableV20.Sum(EnumerableV20.Select(source, selector));
         }
 
         public static decimal? Sum<TSource>(IEnumerable<TSource> source, FuncV20<TSource, decimal?> selector) {
-            return Enumerable.Sum(Enumerable.Select(source, selector));
+            return EnumerableV20.Sum(EnumerableV20.Select(source, selector));
         }
 
         public static int Min(IEnumerable<int> source) {
@@ -1617,47 +1617,47 @@ namespace System.Linq
         }
 
         public static int Min<TSource>(IEnumerable<TSource> source, FuncV20<TSource, int> selector) {
-            return Enumerable.Min(Enumerable.Select(source, selector));
+            return EnumerableV20.Min(EnumerableV20.Select(source, selector));
         }
 
         public static int? Min<TSource>(IEnumerable<TSource> source, FuncV20<TSource, int?> selector) {
-            return Enumerable.Min(Enumerable.Select(source, selector));
+            return EnumerableV20.Min(EnumerableV20.Select(source, selector));
         }
 
         public static long Min<TSource>(IEnumerable<TSource> source, FuncV20<TSource, long> selector) {
-            return Enumerable.Min(Enumerable.Select(source, selector));
+            return EnumerableV20.Min(EnumerableV20.Select(source, selector));
         }
 
         public static long? Min<TSource>(IEnumerable<TSource> source, FuncV20<TSource, long?> selector) {
-            return Enumerable.Min(Enumerable.Select(source, selector));
+            return EnumerableV20.Min(EnumerableV20.Select(source, selector));
         }
 
         public static float Min<TSource>(IEnumerable<TSource> source, FuncV20<TSource, float> selector) {
-            return Enumerable.Min(Enumerable.Select(source, selector));
+            return EnumerableV20.Min(EnumerableV20.Select(source, selector));
         }
 
         public static float? Min<TSource>(IEnumerable<TSource> source, FuncV20<TSource, float?> selector) {
-            return Enumerable.Min(Enumerable.Select(source, selector));
+            return EnumerableV20.Min(EnumerableV20.Select(source, selector));
         }
 
         public static double Min<TSource>(IEnumerable<TSource> source, FuncV20<TSource, double> selector) {
-            return Enumerable.Min(Enumerable.Select(source, selector));
+            return EnumerableV20.Min(EnumerableV20.Select(source, selector));
         }
 
         public static double? Min<TSource>(IEnumerable<TSource> source, FuncV20<TSource, double?> selector) {
-            return Enumerable.Min(Enumerable.Select(source, selector));
+            return EnumerableV20.Min(EnumerableV20.Select(source, selector));
         }
 
         public static decimal Min<TSource>(IEnumerable<TSource> source, FuncV20<TSource, decimal> selector) {
-            return Enumerable.Min(Enumerable.Select(source, selector));
+            return EnumerableV20.Min(EnumerableV20.Select(source, selector));
         }
 
         public static decimal? Min<TSource>(IEnumerable<TSource> source, FuncV20<TSource, decimal?> selector) {
-            return Enumerable.Min(Enumerable.Select(source, selector));
+            return EnumerableV20.Min(EnumerableV20.Select(source, selector));
         }
 
         public static TResult Min<TSource, TResult>(IEnumerable<TSource> source, FuncV20<TSource, TResult> selector) {
-            return Enumerable.Min(Enumerable.Select(source, selector));
+            return EnumerableV20.Min(EnumerableV20.Select(source, selector));
         }
 
         public static int Max(IEnumerable<int> source) {
@@ -1821,47 +1821,47 @@ namespace System.Linq
         }
 
         public static int Max<TSource>(IEnumerable<TSource> source, FuncV20<TSource, int> selector) {
-            return Enumerable.Max(Enumerable.Select(source, selector));
+            return EnumerableV20.Max(EnumerableV20.Select(source, selector));
         }
 
         public static int? Max<TSource>(IEnumerable<TSource> source, FuncV20<TSource, int?> selector) {
-            return Enumerable.Max(Enumerable.Select(source, selector));
+            return EnumerableV20.Max(EnumerableV20.Select(source, selector));
         }
 
         public static long Max<TSource>(IEnumerable<TSource> source, FuncV20<TSource, long> selector) {
-            return Enumerable.Max(Enumerable.Select(source, selector));
+            return EnumerableV20.Max(EnumerableV20.Select(source, selector));
         }
 
         public static long? Max<TSource>(IEnumerable<TSource> source, FuncV20<TSource, long?> selector) {
-            return Enumerable.Max(Enumerable.Select(source, selector));
+            return EnumerableV20.Max(EnumerableV20.Select(source, selector));
         }
 
         public static float Max<TSource>(IEnumerable<TSource> source, FuncV20<TSource, float> selector) {
-            return Enumerable.Max(Enumerable.Select(source, selector));
+            return EnumerableV20.Max(EnumerableV20.Select(source, selector));
         }
 
         public static float? Max<TSource>(IEnumerable<TSource> source, FuncV20<TSource, float?> selector) {
-            return Enumerable.Max(Enumerable.Select(source, selector));
+            return EnumerableV20.Max(EnumerableV20.Select(source, selector));
         }
 
         public static double Max<TSource>(IEnumerable<TSource> source, FuncV20<TSource, double> selector) {
-            return Enumerable.Max(Enumerable.Select(source, selector));
+            return EnumerableV20.Max(EnumerableV20.Select(source, selector));
         }
 
         public static double? Max<TSource>(IEnumerable<TSource> source, FuncV20<TSource, double?> selector) {
-            return Enumerable.Max(Enumerable.Select(source, selector));
+            return EnumerableV20.Max(EnumerableV20.Select(source, selector));
         }
 
         public static decimal Max<TSource>(IEnumerable<TSource> source, FuncV20<TSource, decimal> selector) {
-            return Enumerable.Max(Enumerable.Select(source, selector));
+            return EnumerableV20.Max(EnumerableV20.Select(source, selector));
         }
 
         public static decimal? Max<TSource>(IEnumerable<TSource> source, FuncV20<TSource, decimal?> selector) {
-            return Enumerable.Max(Enumerable.Select(source, selector));
+            return EnumerableV20.Max(EnumerableV20.Select(source, selector));
         }
 
         public static TResult Max<TSource, TResult>(IEnumerable<TSource> source, FuncV20<TSource, TResult> selector) {
-            return Enumerable.Max(Enumerable.Select(source, selector));
+            return EnumerableV20.Max(EnumerableV20.Select(source, selector));
         }
 
         public static double Average(IEnumerable<int> source) {
@@ -2015,43 +2015,43 @@ namespace System.Linq
         }
 
         public static double Average<TSource>(IEnumerable<TSource> source, FuncV20<TSource, int> selector) {
-            return Enumerable.Average(Enumerable.Select(source, selector));
+            return EnumerableV20.Average(EnumerableV20.Select(source, selector));
         }
 
         public static double? Average<TSource>(IEnumerable<TSource> source, FuncV20<TSource, int?> selector) {
-            return Enumerable.Average(Enumerable.Select(source, selector));
+            return EnumerableV20.Average(EnumerableV20.Select(source, selector));
         }
 
         public static double Average<TSource>(IEnumerable<TSource> source, FuncV20<TSource, long> selector) {
-            return Enumerable.Average(Enumerable.Select(source, selector));
+            return EnumerableV20.Average(EnumerableV20.Select(source, selector));
         }
 
         public static double? Average<TSource>(IEnumerable<TSource> source, FuncV20<TSource, long?> selector) {
-            return Enumerable.Average(Enumerable.Select(source, selector));
+            return EnumerableV20.Average(EnumerableV20.Select(source, selector));
         }
 
         public static float Average<TSource>(IEnumerable<TSource> source, FuncV20<TSource, float> selector) {
-            return Enumerable.Average(Enumerable.Select(source, selector));
+            return EnumerableV20.Average(EnumerableV20.Select(source, selector));
         }
 
         public static float? Average<TSource>(IEnumerable<TSource> source, FuncV20<TSource, float?> selector) {
-            return Enumerable.Average(Enumerable.Select(source, selector));
+            return EnumerableV20.Average(EnumerableV20.Select(source, selector));
         }
 
         public static double Average<TSource>(IEnumerable<TSource> source, FuncV20<TSource, double> selector) {
-            return Enumerable.Average(Enumerable.Select(source, selector));
+            return EnumerableV20.Average(EnumerableV20.Select(source, selector));
         }
 
         public static double? Average<TSource>(IEnumerable<TSource> source, FuncV20<TSource, double?> selector) {
-            return Enumerable.Average(Enumerable.Select(source, selector));
+            return EnumerableV20.Average(EnumerableV20.Select(source, selector));
         }
 
         public static decimal Average<TSource>(IEnumerable<TSource> source, FuncV20<TSource, decimal> selector) {
-            return Enumerable.Average(Enumerable.Select(source, selector));
+            return EnumerableV20.Average(EnumerableV20.Select(source, selector));
         }
 
         public static decimal? Average<TSource>(IEnumerable<TSource> source, FuncV20<TSource, decimal?> selector) {
-            return Enumerable.Average(Enumerable.Select(source, selector));
+            return EnumerableV20.Average(EnumerableV20.Select(source, selector));
         }
     }
 

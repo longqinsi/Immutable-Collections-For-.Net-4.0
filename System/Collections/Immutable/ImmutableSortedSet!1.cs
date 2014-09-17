@@ -106,7 +106,7 @@ namespace System.Collections.Immutable
             Requires.NotNull<IEnumerable<T>>(other, "other");
             if (this.IsEmpty)
             {
-                return Enumerable.Any<T>(other);
+                return EnumerableV20.Any<T>(other);
             }
             SortedSetV20<T> set = new SortedSetV20<T>(other, this.KeyComparer);
             if (this.Count < set.Count)
@@ -186,7 +186,7 @@ namespace System.Collections.Immutable
         private ImmutableSortedSet<T> LeafToRootRefill(IEnumerable<T> addedItems)
         {
             Requires.NotNull<IEnumerable<T>>(addedItems, "addedItems");
-            SortedSetV20<T> collection = new SortedSetV20<T>(Enumerable.Concat<T>(this, addedItems), this.KeyComparer);
+            SortedSetV20<T> collection = new SortedSetV20<T>(EnumerableV20.Concat<T>(this, addedItems), this.KeyComparer);
             Node root = Node.NodeTreeFromSortedSet(collection);
             return this.Wrap(root);
         }
