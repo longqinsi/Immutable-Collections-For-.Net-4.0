@@ -18,7 +18,7 @@ namespace System.Collections.Immutable
     {
         public readonly static ImmutableDictionary<TKey, TValue> Empty;
 
-        private readonly static Action<KeyValuePair<Int32, ImmutableDictionary<TKey, TValue>.HashBucket>> FreezeBucketAction;
+        private readonly static ActionV20<KeyValuePair<Int32, ImmutableDictionary<TKey, TValue>.HashBucket>> FreezeBucketAction;
 
         private readonly Int32 count;
 

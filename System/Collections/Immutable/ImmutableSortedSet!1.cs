@@ -15,7 +15,7 @@ namespace System.Collections.Immutable
     using Validation;
 
     [DebuggerDisplay("Count = {Count}"), DebuggerTypeProxy(typeof(ImmutableSortedSet<>.DebuggerProxy))]
-    public sealed class ImmutableSortedSet<T> : IImmutableSet<T>, ISortKeyCollection<T>, IReadOnlyList<T>, IReadOnlyCollection<T>, IList<T>, ISet<T>, ICollection<T>, IEnumerable<T>, IList, ICollection, IEnumerable
+    public sealed class ImmutableSortedSet<T> : IImmutableSet<T>, ISortKeyCollection<T>, IReadOnlyList<T>, IReadOnlyCollection<T>, IList<T>, ISetV20<T>, ICollection<T>, IEnumerable<T>, IList, ICollection, IEnumerable
     {
         private readonly IComparer<T> comparer;
         public static readonly ImmutableSortedSet<T> Empty;
@@ -108,7 +108,7 @@ namespace System.Collections.Immutable
             {
                 return Enumerable.Any<T>(other);
             }
-            SortedSet<T> set = new SortedSet<T>(other, this.KeyComparer);
+            SortedSetV20<T> set = new SortedSetV20<T>(other, this.KeyComparer);
             if (this.Count < set.Count)
             {
                 int num = 0;
@@ -158,7 +158,7 @@ namespace System.Collections.Immutable
             {
                 return true;
             }
-            SortedSet<T> set = new SortedSet<T>(other, this.KeyComparer);
+            SortedSetV20<T> set = new SortedSetV20<T>(other, this.KeyComparer);
             int num = 0;
             foreach (T local in set)
             {
@@ -186,7 +186,7 @@ namespace System.Collections.Immutable
         private ImmutableSortedSet<T> LeafToRootRefill(IEnumerable<T> addedItems)
         {
             Requires.NotNull<IEnumerable<T>>(addedItems, "addedItems");
-            SortedSet<T> collection = new SortedSet<T>(Enumerable.Concat<T>(this, addedItems), this.KeyComparer);
+            SortedSetV20<T> collection = new SortedSetV20<T>(Enumerable.Concat<T>(this, addedItems), this.KeyComparer);
             Node root = Node.NodeTreeFromSortedSet(collection);
             return this.Wrap(root);
         }
@@ -222,7 +222,7 @@ namespace System.Collections.Immutable
         public bool SetEquals(IEnumerable<T> other)
         {
             Requires.NotNull<IEnumerable<T>>(other, "other");
-            SortedSet<T> set = new SortedSet<T>(other, this.KeyComparer);
+            SortedSetV20<T> set = new SortedSetV20<T>(other, this.KeyComparer);
             if (this.Count != set.Count)
             {
                 return false;
@@ -296,27 +296,27 @@ namespace System.Collections.Immutable
             throw new NotSupportedException();
         }
 
-        bool ISet<T>.Add(T item)
+        bool ISetV20<T>.Add(T item)
         {
             throw new NotSupportedException();
         }
 
-        void ISet<T>.ExceptWith(IEnumerable<T> other)
+        void ISetV20<T>.ExceptWith(IEnumerable<T> other)
         {
             throw new NotSupportedException();
         }
 
-        void ISet<T>.IntersectWith(IEnumerable<T> other)
+        void ISetV20<T>.IntersectWith(IEnumerable<T> other)
         {
             throw new NotSupportedException();
         }
 
-        void ISet<T>.SymmetricExceptWith(IEnumerable<T> other)
+        void ISetV20<T>.SymmetricExceptWith(IEnumerable<T> other)
         {
             throw new NotSupportedException();
         }
 
-        void ISet<T>.UnionWith(IEnumerable<T> other)
+        void ISetV20<T>.UnionWith(IEnumerable<T> other)
         {
             throw new NotSupportedException();
         }
@@ -625,7 +625,7 @@ namespace System.Collections.Immutable
         }
 
         [DebuggerDisplay("Count = {Count}"), DebuggerTypeProxy(typeof(ImmutableSortedSet<>.Builder.DebuggerProxy))]
-        public sealed class Builder : ISortKeyCollection<T>, IReadOnlyCollection<T>, ISet<T>, ICollection<T>, IEnumerable<T>, ICollection, IEnumerable
+        public sealed class Builder : ISortKeyCollection<T>, IReadOnlyCollection<T>, ISetV20<T>, ICollection<T>, IEnumerable<T>, ICollection, IEnumerable
         {
             private IComparer<T> comparer;
             private ImmutableSortedSet<T> immutable;
@@ -1343,9 +1343,9 @@ namespace System.Collections.Immutable
                 return new ImmutableSortedSet<T>.Node(items[start + num2], left, ImmutableSortedSet<T>.Node.NodeTreeFromList(items, (start + num2) + 1, num), true);
             }
 
-            internal static ImmutableSortedSet<T>.Node NodeTreeFromSortedSet(SortedSet<T> collection)
+            internal static ImmutableSortedSet<T>.Node NodeTreeFromSortedSet(SortedSetV20<T> collection)
             {
-                Requires.NotNull<SortedSet<T>>(collection, "collection");
+                Requires.NotNull<SortedSetV20<T>>(collection, "collection");
                 if (collection.Count == 0)
                 {
                     return ImmutableSortedSet<T>.Node.EmptyNode;

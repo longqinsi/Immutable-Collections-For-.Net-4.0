@@ -1269,7 +1269,7 @@ namespace System.Collections.Immutable
                 return ImmutableSortedDictionary<TKey, TValue>.Node.RotateRight(tree.Mutate(ImmutableSortedDictionary<TKey, TValue>.Node.RotateLeft(tree.left), null));
             }
 
-            internal void Freeze(Action<KeyValuePair<TKey, TValue>> freezeAction = null)
+            internal void Freeze(ActionV20<KeyValuePair<TKey, TValue>> freezeAction = null)
             {
                 if (!this.frozen)
                 {

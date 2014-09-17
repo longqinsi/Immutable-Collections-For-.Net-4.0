@@ -5,7 +5,7 @@ using System.Text;
 namespace System.Collections.Generic
 {
     [Serializable]
-    internal class HashSetEqualityComparer<T> : IEqualityComparer<HashSet<T>>
+    internal class HashSetEqualityComparer<T> : IEqualityComparer<HashSetV20<T>>
     {
         // Fields
         private IEqualityComparer<T> m_comparer;
@@ -38,9 +38,9 @@ namespace System.Collections.Generic
             return (this.m_comparer == comparer.m_comparer);
         }
 
-        public bool Equals(HashSet<T> x, HashSet<T> y)
+        public bool Equals(HashSetV20<T> x, HashSetV20<T> y)
         {
-            return HashSet<T>.HashSetEquals(x, y, this.m_comparer);
+            return HashSetV20<T>.HashSetEquals(x, y, this.m_comparer);
         }
 
         public override int GetHashCode()
@@ -48,7 +48,7 @@ namespace System.Collections.Generic
             return this.m_comparer.GetHashCode();
         }
 
-        public int GetHashCode(HashSet<T> obj)
+        public int GetHashCode(HashSetV20<T> obj)
         {
             int num = 0;
             if (obj != null)

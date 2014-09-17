@@ -9,7 +9,7 @@ using System.Threading;
 
 namespace System.Collections
 {
-    internal static class HashHelpers
+    public static class HashHelpers
     {
         // Fields
         private const int bufferSize = 0x400;

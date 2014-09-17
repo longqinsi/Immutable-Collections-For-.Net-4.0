@@ -58,7 +58,7 @@ namespace System.Collections.Generic {
 #else
     [Serializable()]
     [System.Security.Permissions.HostProtection(MayLeakOnAbort = true)]
-    public class HashSet<T> : ICollection<T>, ISerializable, IDeserializationCallback, ISet<T>
+    public class HashSetV20<T> : ICollection<T>, ISerializable, IDeserializationCallback, ISetV20<T>
 #endif
     {
 
@@ -96,10 +96,10 @@ namespace System.Collections.Generic {
 
         #region Constructors
 
-        public HashSet()
+        public HashSetV20()
             : this(EqualityComparer<T>.Default) { }
 
-        public HashSet(IEqualityComparer<T> comparer) {
+        public HashSetV20(IEqualityComparer<T> comparer) {
             if (comparer == null) {
                 comparer = EqualityComparer<T>.Default;
             }
@@ -111,7 +111,7 @@ namespace System.Collections.Generic {
             m_version = 0;
         }
 
-        public HashSet(IEnumerable<T> collection)
+        public HashSetV20(IEnumerable<T> collection)
             : this(collection, EqualityComparer<T>.Default) { }
 
         /// <summary>
@@ -121,7 +121,7 @@ namespace System.Collections.Generic {
         /// </summary>
         /// <param name="collection"></param>
         /// <param name="comparer"></param>
-        public HashSet(IEnumerable<T> collection, IEqualityComparer<T> comparer)
+        public HashSetV20(IEnumerable<T> collection, IEqualityComparer<T> comparer)
             : this(comparer) {
             if (collection == null) {
                 throw new ArgumentNullException("collection");
@@ -145,7 +145,7 @@ namespace System.Collections.Generic {
         }
 
 #if !SILVERLIGHT
-        protected HashSet(SerializationInfo info, StreamingContext context) {
+        protected HashSetV20(SerializationInfo info, StreamingContext context) {
             // We can't do anything with the keys and values until the entire graph has been 
             // deserialized and we have a reasonable estimate that GetHashCode is not going to 
             // fail.  For the time being, we'll just cache this.  The graph is not valid until 
@@ -422,7 +422,7 @@ namespace System.Collections.Generic {
                     return;
                 }
 
-                HashSet<T> otherAsSet = other as HashSet<T>;
+                HashSetV20<T> otherAsSet = other as HashSetV20<T>;
                 // faster if other is a hashset using same equality comparer; so check 
                 // that other is a hashset using the same equality comparer.
                 if (otherAsSet != null && AreEqualityComparersEqual(this, otherAsSet)) {
@@ -481,7 +481,7 @@ namespace System.Collections.Generic {
                 return;
             }
 
-            HashSet<T> otherAsSet = other as HashSet<T>;
+            HashSetV20<T> otherAsSet = other as HashSetV20<T>;
             // If other is a HashSet, it has unique elements according to its equality comparer,
             // but if they're using different equality comparers, then assumption of uniqueness
             // will fail. So first check if other is a hashset using the same equality comparer;
@@ -519,7 +519,7 @@ namespace System.Collections.Generic {
                 return true;
             }
 
-            HashSet<T> otherAsSet = other as HashSet<T>;
+            HashSetV20<T> otherAsSet = other as HashSetV20<T>;
             // faster if other has unique elements according to this equality comparer; so check 
             // that other is a hashset using the same equality comparer.
             if (otherAsSet != null && AreEqualityComparersEqual(this, otherAsSet)) {
@@ -564,7 +564,7 @@ namespace System.Collections.Generic {
                 if (m_count == 0) {
                     return otherAsCollection.Count > 0;
                 }
-                HashSet<T> otherAsSet = other as HashSet<T>;
+                HashSetV20<T> otherAsSet = other as HashSetV20<T>;
                 // faster if other is a hashset (and we're using same equality comparer)
                 if (otherAsSet != null && AreEqualityComparersEqual(this, otherAsSet)) {
                     if (m_count >= otherAsSet.Count) {
@@ -606,7 +606,7 @@ namespace System.Collections.Generic {
                 if (otherAsCollection.Count == 0) {
                     return true;
                 }
-                HashSet<T> otherAsSet = other as HashSet<T>;
+                HashSetV20<T> otherAsSet = other as HashSetV20<T>;
                 // try to compare based on counts alone if other is a hashset with
                 // same equality comparer
                 if (otherAsSet != null && AreEqualityComparersEqual(this, otherAsSet)) {
@@ -656,7 +656,7 @@ namespace System.Collections.Generic {
                     // note that this has at least one element, based on above check
                     return true;
                 }
-                HashSet<T> otherAsSet = other as HashSet<T>;
+                HashSetV20<T> otherAsSet = other as HashSetV20<T>;
                 // faster if other is a hashset with the same equality comparer
                 if (otherAsSet != null && AreEqualityComparersEqual(this, otherAsSet)) {
                     if (otherAsSet.Count >= m_count) {
@@ -706,7 +706,7 @@ namespace System.Collections.Generic {
             }
 
 
-            HashSet<T> otherAsSet = other as HashSet<T>;
+            HashSetV20<T> otherAsSet = other as HashSetV20<T>;
             // faster if other is a hashset and we're using same equality comparer
             if (otherAsSet != null && AreEqualityComparersEqual(this, otherAsSet)) {
                 // attempt to return early: since both contain unique elements, if they have 
@@ -862,7 +862,7 @@ namespace System.Collections.Generic {
         /// Used for deep equality of HashSet testing
         /// </summary>
         /// <returns></returns>
-        public static IEqualityComparer<HashSet<T>> CreateSetComparer() {
+        public static IEqualityComparer<HashSetV20<T>> CreateSetComparer() {
             return new HashSetEqualityComparer<T>();
         }
 #endif
@@ -1019,7 +1019,7 @@ namespace System.Collections.Generic {
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
-        private bool IsSubsetOfHashSetWithSameEC(HashSet<T> other) {
+        private bool IsSubsetOfHashSetWithSameEC(HashSetV20<T> other) {
 
             foreach (T item in this) {
                 if (!other.Contains(item)) {
@@ -1034,7 +1034,7 @@ namespace System.Collections.Generic {
         /// because we can use other's Contains
         /// </summary>
         /// <param name="other"></param>
-        private void IntersectWithHashSetWithSameEC(HashSet<T> other) {
+        private void IntersectWithHashSetWithSameEC(HashSetV20<T> other) {
             for (int i = 0; i < m_lastIndex; i++) {
                 if (m_slots[i].hashCode >= 0) {
                     T item = m_slots[i].value;
@@ -1115,7 +1115,7 @@ namespace System.Collections.Generic {
         /// same equality comparer.
         /// </summary>
         /// <param name="other"></param>
-        private void SymmetricExceptWithUniqueHashSet(HashSet<T> other) {
+        private void SymmetricExceptWithUniqueHashSet(HashSetV20<T> other) {
             foreach (T item in other) {
                 if (!Remove(item)) {
                     AddIfNotPresent(item);
@@ -1342,7 +1342,7 @@ namespace System.Collections.Generic {
         /// <param name="set2"></param>
         /// <param name="comparer"></param>
         /// <returns></returns>
-        internal static bool HashSetEquals(HashSet<T> set1, HashSet<T> set2, IEqualityComparer<T> comparer) {
+        internal static bool HashSetEquals(HashSetV20<T> set1, HashSetV20<T> set2, IEqualityComparer<T> comparer) {
             // handle null cases first
             if (set1 == null) {
                 return (set2 == null);
@@ -1390,7 +1390,7 @@ namespace System.Collections.Generic {
         /// <param name="set1"></param>
         /// <param name="set2"></param>
         /// <returns></returns>
-        private static bool AreEqualityComparersEqual(HashSet<T> set1, HashSet<T> set2) {
+        private static bool AreEqualityComparersEqual(HashSetV20<T> set1, HashSetV20<T> set2) {
             return set1.Comparer.Equals(set2.Comparer);
         }
 
@@ -1425,12 +1425,12 @@ namespace System.Collections.Generic {
         [System.Security.Permissions.HostProtection(MayLeakOnAbort = true)]
 #endif
         public struct Enumerator : IEnumerator<T>, System.Collections.IEnumerator {
-            private HashSet<T> set;
+            private HashSetV20<T> set;
             private int index;
             private int version;
             private T current;
 
-            internal Enumerator(HashSet<T> set) {
+            internal Enumerator(HashSetV20<T> set) {
                 this.set = set;
                 index = 0;
                 version = set.m_version;

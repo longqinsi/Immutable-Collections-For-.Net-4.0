@@ -12,11 +12,11 @@ namespace System.Collections.Immutable
 {
     [DebuggerDisplay("Count = {Count}")]
     [DebuggerTypeProxy(typeof(ImmutableHashSet<>.DebuggerProxy))]
-    public sealed class ImmutableHashSet<T> : IImmutableSet<T>, IHashKeyCollection<T>, IReadOnlyCollection<T>, ISet<T>, ICollection<T>, IEnumerable<T>, ICollection, IEnumerable
+    public sealed class ImmutableHashSet<T> : IImmutableSet<T>, IHashKeyCollection<T>, IReadOnlyCollection<T>, ISetV20<T>, ICollection<T>, IEnumerable<T>, ICollection, IEnumerable
     {
         public readonly static ImmutableHashSet<T> Empty;
 
-        private readonly static Action<KeyValuePair<Int32, ImmutableHashSet<T>.HashBucket>> FreezeBucketAction;
+        private readonly static ActionV20<KeyValuePair<Int32, ImmutableHashSet<T>.HashBucket>> FreezeBucketAction;
 
         private readonly IEqualityComparer<T> equalityComparer;
 
@@ -229,14 +229,14 @@ namespace System.Collections.Immutable
             {
                 return Enumerable.Any<T>(other);
             }
-            HashSet<T> ts = new HashSet<T>(other, origin.EqualityComparer);
+            HashSetV20<T> ts = new HashSetV20<T>(other, origin.EqualityComparer);
             if (origin.Count >= ts.Count)
             {
                 return false;
             }
             Int32 num = 0;
             Boolean flag1 = false;
-            HashSet<T>.Enumerator enumerator = ts.GetEnumerator();
+            HashSetV20<T>.Enumerator enumerator = ts.GetEnumerator();
             try
             {
                 while (enumerator.MoveNext())
@@ -311,7 +311,7 @@ namespace System.Collections.Immutable
             {
                 return true;
             }
-            HashSet<T> ts = new HashSet<T>(other, origin.EqualityComparer);
+            HashSetV20<T> ts = new HashSetV20<T>(other, origin.EqualityComparer);
             Int32 num = 0;
             foreach (T t in ts)
             {
@@ -416,13 +416,13 @@ namespace System.Collections.Immutable
         {
             Boolean flag;
             Requires.NotNull<IEnumerable<T>>(other, "other");
-            HashSet<T> ts = new HashSet<T>(other, origin.EqualityComparer);
+            HashSetV20<T> ts = new HashSetV20<T>(other, origin.EqualityComparer);
             if (origin.Count != ts.Count)
             {
                 return false;
             }
             Int32 num = 0;
-            HashSet<T>.Enumerator enumerator = ts.GetEnumerator();
+            HashSetV20<T>.Enumerator enumerator = ts.GetEnumerator();
             try
             {
                 while (enumerator.MoveNext())
@@ -515,27 +515,27 @@ namespace System.Collections.Immutable
             return this.GetEnumerator();
         }
 
-        Boolean System.Collections.Generic.ISet<T>.Add(T item)
+        Boolean System.Collections.Generic.ISetV20<T>.Add(T item)
         {
             throw new NotSupportedException();
         }
 
-        void System.Collections.Generic.ISet<T>.ExceptWith(IEnumerable<T> other)
+        void System.Collections.Generic.ISetV20<T>.ExceptWith(IEnumerable<T> other)
         {
             throw new NotSupportedException();
         }
 
-        void System.Collections.Generic.ISet<T>.IntersectWith(IEnumerable<T> other)
+        void System.Collections.Generic.ISetV20<T>.IntersectWith(IEnumerable<T> other)
         {
             throw new NotSupportedException();
         }
 
-        void System.Collections.Generic.ISet<T>.SymmetricExceptWith(IEnumerable<T> other)
+        void System.Collections.Generic.ISetV20<T>.SymmetricExceptWith(IEnumerable<T> other)
         {
             throw new NotSupportedException();
         }
 
-        void System.Collections.Generic.ISet<T>.UnionWith(IEnumerable<T> other)
+        void System.Collections.Generic.ISetV20<T>.UnionWith(IEnumerable<T> other)
         {
             throw new NotSupportedException();
         }
@@ -698,7 +698,7 @@ namespace System.Collections.Immutable
         }
 
         [DebuggerDisplay("Count = {Count}")]
-        public sealed class Builder : IReadOnlyCollection<T>, ISet<T>, ICollection<T>, IEnumerable<T>, IEnumerable
+        public sealed class Builder : IReadOnlyCollection<T>, ISetV20<T>, ICollection<T>, IEnumerable<T>, IEnumerable
         {
             private ImmutableSortedDictionary<Int32, ImmutableHashSet<T>.HashBucket>.Node root;
 

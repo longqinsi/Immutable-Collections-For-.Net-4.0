@@ -11,7 +11,7 @@ namespace System.Collections.Immutable
         int BinarySearch(T item);
         int BinarySearch(T item, IComparer<T> comparer);
         int BinarySearch(int index, int count, T item, IComparer<T> comparer);
-        ImmutableList<TOutput> ConvertAll<TOutput>(Func<T, TOutput> converter);
+        ImmutableList<TOutput> ConvertAll<TOutput>(FuncV20<T, TOutput> converter);
         void CopyTo(T[] array);
         void CopyTo(T[] array, int arrayIndex);
         void CopyTo(int index, T[] array, int arrayIndex, int count);
@@ -25,7 +25,7 @@ namespace System.Collections.Immutable
         int FindLastIndex(Predicate<T> match);
         int FindLastIndex(int startIndex, Predicate<T> match);
         int FindLastIndex(int startIndex, int count, Predicate<T> match);
-        void ForEach(Action<T> action);
+        void ForEach(ActionV20<T> action);
         ImmutableList<T> GetRange(int index, int count);
         bool TrueForAll(Predicate<T> match);
     }

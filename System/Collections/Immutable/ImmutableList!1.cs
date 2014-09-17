@@ -82,9 +82,9 @@ namespace System.Collections.Immutable
             return (this.IndexOf(value) >= 0);
         }
 
-        public ImmutableList<TOutput> ConvertAll<TOutput>(Func<T, TOutput> converter)
+        public ImmutableList<TOutput> ConvertAll<TOutput>(FuncV20<T, TOutput> converter)
         {
-            Requires.NotNull<Func<T, TOutput>>(converter, "converter");
+            Requires.NotNull<FuncV20<T, TOutput>>(converter, "converter");
             return ImmutableList<TOutput>.WrapNode(this.root.ConvertAll<TOutput>(converter));
         }
 
@@ -193,9 +193,9 @@ namespace System.Collections.Immutable
             return this.root.FindLastIndex(startIndex, count, match);
         }
 
-        public void ForEach(Action<T> action)
+        public void ForEach(ActionV20<T> action)
         {
-            Requires.NotNull<Action<T>>(action, "action");
+            Requires.NotNull<ActionV20<T>>(action, "action");
             foreach (T local in this)
             {
                 action(local);
@@ -700,9 +700,9 @@ namespace System.Collections.Immutable
                 return (this.IndexOf(item) >= 0);
             }
 
-            public ImmutableList<TOutput> ConvertAll<TOutput>(Func<T, TOutput> converter)
+            public ImmutableList<TOutput> ConvertAll<TOutput>(FuncV20<T, TOutput> converter)
             {
-                Requires.NotNull<Func<T, TOutput>>(converter, "converter");
+                Requires.NotNull<FuncV20<T, TOutput>>(converter, "converter");
                 return ImmutableList<TOutput>.WrapNode(this.root.ConvertAll<TOutput>(converter));
             }
 
@@ -795,9 +795,9 @@ namespace System.Collections.Immutable
                 return this.root.FindLastIndex(startIndex, count, match);
             }
 
-            public void ForEach(Action<T> action)
+            public void ForEach(ActionV20<T> action)
             {
-                Requires.NotNull<Action<T>>(action, "action");
+                Requires.NotNull<ActionV20<T>>(action, "action");
                 foreach (T local in this)
                 {
                     action(local);
@@ -1476,7 +1476,7 @@ namespace System.Collections.Immutable
                 return this.left.BinarySearch(index, count, item, comparer);
             }
 
-            internal ImmutableList<TOutput>.Node ConvertAll<TOutput>(Func<T, TOutput> converter)
+            internal ImmutableList<TOutput>.Node ConvertAll<TOutput>(FuncV20<T, TOutput> converter)
             {
                 ImmutableList<TOutput>.Node emptyNode = ImmutableList<TOutput>.Node.EmptyNode;
                 foreach (T local in this)

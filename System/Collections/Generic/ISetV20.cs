@@ -25,7 +25,7 @@ namespace System.Collections.Generic {
     /// by some comparer. It also supports basic set operations such as Union, Intersection, 
     /// Complement and Exclusive Complement.
     /// </summary>
-    public interface ISet<T> : ICollection<T> {
+    public interface ISetV20<T> : ICollection<T> {
 
         //Add ITEM to the set, return true if added, false if duplicate
         new bool Add(T item);    

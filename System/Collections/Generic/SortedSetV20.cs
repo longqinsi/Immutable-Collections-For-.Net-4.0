@@ -40,7 +40,7 @@ namespace System.Collections.Generic {
     // For a detailed description of the algorithm, take a look at "Algorithms" by Robert Sedgewick.
     //
 
-    internal delegate bool TreeWalkPredicate<T>(SortedSet<T>.Node node);
+    internal delegate bool TreeWalkPredicate<T>(SortedSetV20<T>.Node node);
 
     internal enum TreeRotation {
         LeftRotation = 1,
@@ -54,7 +54,7 @@ namespace System.Collections.Generic {
     [DebuggerDisplay("Count = {Count}")]
 #if !FEATURE_NETCORE
     [Serializable]
-    public class SortedSet<T> : ISet<T>, ICollection<T>, ICollection, ISerializable, IDeserializationCallback {
+    public class SortedSetV20<T> : ISetV20<T>, ICollection<T>, ICollection, ISerializable, IDeserializationCallback {
 #else
     public class SortedSet<T> : ISet<T>, ICollection<T>, ICollection {
 #endif //!FEATURE_NETCORE
@@ -90,12 +90,12 @@ namespace System.Collections.Generic {
         #endregion
 
         #region Constructors
-        public SortedSet() {
+        public SortedSetV20() {
             this.comparer = Comparer<T>.Default;
 
         }
 
-        public SortedSet(IComparer<T> comparer) {
+        public SortedSetV20(IComparer<T> comparer) {
             if (comparer == null) {
                 this.comparer = Comparer<T>.Default;
             } else {
@@ -104,9 +104,9 @@ namespace System.Collections.Generic {
         }
 
 
-        public SortedSet(IEnumerable<T> collection) : this(collection, Comparer<T>.Default) { }
+        public SortedSetV20(IEnumerable<T> collection) : this(collection, Comparer<T>.Default) { }
 
-        public SortedSet(IEnumerable<T> collection, IComparer<T> comparer)
+        public SortedSetV20(IEnumerable<T> collection, IComparer<T> comparer)
             : this(comparer) {
 
             if (collection == null) {
@@ -115,8 +115,8 @@ namespace System.Collections.Generic {
 
             // these are explicit type checks in the mould of HashSet. It would have worked better
             // with something like an ISorted<T> (we could make this work for SortedList.Keys etc)
-            SortedSet<T> baseSortedSet = collection as SortedSet<T>;
-            SortedSet<T> baseTreeSubSet = collection as TreeSubSet;
+            SortedSetV20<T> baseSortedSet = collection as SortedSetV20<T>;
+            SortedSetV20<T> baseTreeSubSet = collection as TreeSubSet;
             if (baseSortedSet != null && baseTreeSubSet == null && AreComparersEqual(this, baseSortedSet)) {
                 //breadth first traversal to recreate nodes
                 if (baseSortedSet.Count == 0) {
@@ -128,15 +128,15 @@ namespace System.Collections.Generic {
 
 
                 //pre order way to replicate nodes
-                Stack<Node> theirStack = new Stack<SortedSet<T>.Node>(2 * log2(baseSortedSet.Count) + 2);
-                Stack<Node> myStack = new Stack<SortedSet<T>.Node>(2 * log2(baseSortedSet.Count) + 2);
+                Stack<Node> theirStack = new Stack<SortedSetV20<T>.Node>(2 * log2(baseSortedSet.Count) + 2);
+                Stack<Node> myStack = new Stack<SortedSetV20<T>.Node>(2 * log2(baseSortedSet.Count) + 2);
                 Node theirCurrent = baseSortedSet.root;
-                Node myCurrent = (theirCurrent != null ? new SortedSet<T>.Node(theirCurrent.Item, theirCurrent.IsRed) : null);
+                Node myCurrent = (theirCurrent != null ? new SortedSetV20<T>.Node(theirCurrent.Item, theirCurrent.IsRed) : null);
                 root = myCurrent;
                 while (theirCurrent != null) {
                     theirStack.Push(theirCurrent);
                     myStack.Push(myCurrent);
-                    myCurrent.Left = (theirCurrent.Left != null ? new SortedSet<T>.Node(theirCurrent.Left.Item, theirCurrent.Left.IsRed) : null);
+                    myCurrent.Left = (theirCurrent.Left != null ? new SortedSetV20<T>.Node(theirCurrent.Left.Item, theirCurrent.Left.IsRed) : null);
                     theirCurrent = theirCurrent.Left;
                     myCurrent = myCurrent.Left;
                 }
@@ -146,14 +146,14 @@ namespace System.Collections.Generic {
                     Node theirRight = theirCurrent.Right;
                     Node myRight = null;
                     if (theirRight != null) {
-                        myRight = new SortedSet<T>.Node(theirRight.Item, theirRight.IsRed);
+                        myRight = new SortedSetV20<T>.Node(theirRight.Item, theirRight.IsRed);
                     }
                     myCurrent.Right = myRight;
 
                     while (theirRight != null) {
                         theirStack.Push(theirRight);
                         myStack.Push(myRight);
-                        myRight.Left = (theirRight.Left != null ? new SortedSet<T>.Node(theirRight.Left.Item, theirRight.Left.IsRed) : null);
+                        myRight.Left = (theirRight.Left != null ? new SortedSetV20<T>.Node(theirRight.Left.Item, theirRight.Left.IsRed) : null);
                         theirRight = theirRight.Left;
                         myRight = myRight.Left;
                     }
@@ -178,7 +178,7 @@ namespace System.Collections.Generic {
 
 
 #if !FEATURE_NETCORE
-        protected SortedSet(SerializationInfo info, StreamingContext context) {
+        protected SortedSetV20(SerializationInfo info, StreamingContext context) {
             siInfo = info;
         }
 #endif
@@ -232,7 +232,7 @@ namespace System.Collections.Generic {
             // See page 264 of "Introduction to algorithms" by Thomas H. Cormen
             // note: this should be logbase2, but since the stack grows itself, we 
             // don't want the extra cost
-            Stack<Node> stack = new Stack<Node>(2 * (int)(SortedSet<T>.log2(Count + 1)));
+            Stack<Node> stack = new Stack<Node>(2 * (int)(SortedSetV20<T>.log2(Count + 1)));
             Node current = root;
             while (current != null) {
                 stack.Push(current);
@@ -896,7 +896,7 @@ namespace System.Collections.Generic {
         /// Used for deep equality of SortedSet testing
         /// </summary>
         /// <returns></returns>
-        public static IEqualityComparer<SortedSet<T>> CreateSetComparer() {
+        public static IEqualityComparer<SortedSetV20<T>> CreateSetComparer() {
             return new SortedSetEqualityComparer<T>();
         }
 
@@ -905,7 +905,7 @@ namespace System.Collections.Generic {
         /// memberEqualityComparer. Note that this equality comparer's definition of equality must be the
         /// same as this set's Comparer's definition of equality
         /// </summary>                
-        public static IEqualityComparer<SortedSet<T>> CreateSetComparer(IEqualityComparer<T> memberEqualityComparer) {
+        public static IEqualityComparer<SortedSetV20<T>> CreateSetComparer(IEqualityComparer<T> memberEqualityComparer) {
             return new SortedSetEqualityComparer<T>(memberEqualityComparer);
         }
 
@@ -914,7 +914,7 @@ namespace System.Collections.Generic {
         /// Decides whether these sets are the same, given the comparer. If the EC's are the same, we can
         /// just use SetEquals, but if they aren't then we have to manually check with the given comparer
         /// </summary>        
-        internal static bool SortedSetEquals(SortedSet<T> set1, SortedSet<T> set2, IComparer<T> comparer) {
+        internal static bool SortedSetEquals(SortedSetV20<T> set1, SortedSetV20<T> set2, IComparer<T> comparer) {
             // handle null cases first
             if (set1 == null) {
                 return (set2 == null);
@@ -948,7 +948,7 @@ namespace System.Collections.Generic {
 
 
         //This is a little frustrating because we can't support more sorted structures
-        private static bool AreComparersEqual(SortedSet<T> set1, SortedSet<T> set2) {
+        private static bool AreComparersEqual(SortedSetV20<T> set1, SortedSetV20<T> set2) {
             return set1.Comparer.Equals(set2.Comparer);
         }
 
@@ -987,14 +987,14 @@ namespace System.Collections.Generic {
                 throw new ArgumentNullException("other");
             }
 
-            SortedSet<T> s = other as SortedSet<T>;
+            SortedSetV20<T> s = other as SortedSetV20<T>;
             TreeSubSet t = this as TreeSubSet;
 
             if (t != null)
                 VersionCheck();
 
             if (s != null && t == null && this.count == 0) {
-                SortedSet<T> dummy = new SortedSet<T>(s, this.comparer);
+                SortedSetV20<T> dummy = new SortedSetV20<T>(s, this.comparer);
                 this.root = dummy.root;
                 this.count = dummy.count;
                 this.version++;
@@ -1037,7 +1037,7 @@ namespace System.Collections.Generic {
                 root = null;
 
 
-                root = SortedSet<T>.ConstructRootFromSortedArray(merged, 0, c - 1, null);
+                root = SortedSetV20<T>.ConstructRootFromSortedArray(merged, 0, c - 1, null);
                 count = c;
                 version++;
             } else {
@@ -1129,7 +1129,7 @@ namespace System.Collections.Generic {
             //HashSet<T> optimizations can't be done until equality comparers and comparers are related
 
             //Technically, this would work as well with an ISorted<T>
-            SortedSet<T> s = other as SortedSet<T>;
+            SortedSetV20<T> s = other as SortedSetV20<T>;
             TreeSubSet t = this as TreeSubSet;
             if (t != null)
                 VersionCheck();
@@ -1164,7 +1164,7 @@ namespace System.Collections.Generic {
                 //safe to gc the root, we  have all the elements
                 root = null;
 
-                root = SortedSet<T>.ConstructRootFromSortedArray(merged, 0, c - 1, null);
+                root = SortedSetV20<T>.ConstructRootFromSortedArray(merged, 0, c - 1, null);
                 count = c;
                 version++;
             } else {
@@ -1208,7 +1208,7 @@ namespace System.Collections.Generic {
                 return;
             }
 
-            SortedSet<T> asSorted = other as SortedSet<T>;
+            SortedSetV20<T> asSorted = other as SortedSetV20<T>;
 
             if (asSorted != null && AreComparersEqual(this, asSorted)) {
                 //outside range, no point doing anything               
@@ -1252,7 +1252,7 @@ namespace System.Collections.Generic {
             }
 
 
-            SortedSet<T> asSorted = other as SortedSet<T>;
+            SortedSetV20<T> asSorted = other as SortedSetV20<T>;
 
 #if USING_HASH_SET
             HashSet<T> asHash = other as HashSet<T>;
@@ -1274,7 +1274,7 @@ namespace System.Collections.Generic {
         }
 
         //OTHER must be a set
-        internal void SymmetricExceptWithSameEC(ISet<T> other) {
+        internal void SymmetricExceptWithSameEC(ISetV20<T> other) {
             foreach (T item in other) {
                 //yes, it is classier to say
                 //if (!this.Remove(item))this.Add(item);
@@ -1323,7 +1323,7 @@ namespace System.Collections.Generic {
                 return true;
 
 
-            SortedSet<T> asSorted = other as SortedSet<T>;
+            SortedSetV20<T> asSorted = other as SortedSetV20<T>;
             if (asSorted != null && AreComparersEqual(this, asSorted)) {
                 if (this.Count > asSorted.Count)
                     return false;
@@ -1337,8 +1337,8 @@ namespace System.Collections.Generic {
             }
         }
 
-        private bool IsSubsetOfSortedSetWithSameEC(SortedSet<T> asSorted) {
-            SortedSet<T> prunedOther = asSorted.GetViewBetween(this.Min, this.Max);
+        private bool IsSubsetOfSortedSetWithSameEC(SortedSetV20<T> asSorted) {
+            SortedSetV20<T> prunedOther = asSorted.GetViewBetween(this.Min, this.Max);
             foreach (T item in this) {
                 if (!prunedOther.Contains(item))
                     return false;
@@ -1373,7 +1373,7 @@ namespace System.Collections.Generic {
             }
 #endif
             //another for sorted sets with the same comparer
-            SortedSet<T> asSorted = other as SortedSet<T>;
+            SortedSetV20<T> asSorted = other as SortedSetV20<T>;
             if (asSorted != null && AreComparersEqual(this, asSorted)) {
                 if (this.Count >= asSorted.Count)
                     return false;
@@ -1409,11 +1409,11 @@ namespace System.Collections.Generic {
             }
 #endif
             //another for sorted sets with the same comparer
-            SortedSet<T> asSorted = other as SortedSet<T>;
+            SortedSetV20<T> asSorted = other as SortedSetV20<T>;
             if (asSorted != null && AreComparersEqual(this, asSorted)) {
                 if (this.Count < asSorted.Count)
                     return false;
-                SortedSet<T> pruned = GetViewBetween(asSorted.Min, asSorted.Max);
+                SortedSetV20<T> pruned = GetViewBetween(asSorted.Min, asSorted.Max);
                 foreach (T item in asSorted) {
                     if (!pruned.Contains(item))
                         return false;
@@ -1450,11 +1450,11 @@ namespace System.Collections.Generic {
             }
 #endif
             //another way for sorted sets
-            SortedSet<T> asSorted = other as SortedSet<T>;
+            SortedSetV20<T> asSorted = other as SortedSetV20<T>;
             if (asSorted != null && AreComparersEqual(asSorted, this)) {
                 if (asSorted.Count >= this.Count)
                     return false;
-                SortedSet<T> pruned = GetViewBetween(asSorted.Min, asSorted.Max);
+                SortedSetV20<T> pruned = GetViewBetween(asSorted.Min, asSorted.Max);
                 foreach (T item in asSorted) {
                     if (!pruned.Contains(item))
                         return false;
@@ -1490,7 +1490,7 @@ namespace System.Collections.Generic {
                 return asHash.SetEquals(this);
             }
 #endif
-            SortedSet<T> asSorted = other as SortedSet<T>;
+            SortedSetV20<T> asSorted = other as SortedSetV20<T>;
             if (asSorted != null && AreComparersEqual(this, asSorted)) {
                 IEnumerator<T> mine = this.GetEnumerator();
                 IEnumerator<T> theirs = asSorted.GetEnumerator();
@@ -1530,7 +1530,7 @@ namespace System.Collections.Generic {
             if ((other as ICollection<T> != null) && (other as ICollection<T>).Count == 0)
                 return false;
 
-            SortedSet<T> asSorted = other as SortedSet<T>;
+            SortedSetV20<T> asSorted = other as SortedSetV20<T>;
             if (asSorted != null && AreComparersEqual(this, asSorted) && (comparer.Compare(Min, asSorted.Max) > 0 || comparer.Compare(Max, asSorted.Min) < 0)) {
                 return false;
             }
@@ -1669,7 +1669,7 @@ namespace System.Collections.Generic {
         public T Min {
             get {
                 T ret = default(T);
-                InOrderTreeWalk(delegate(SortedSet<T>.Node n) { ret = n.Item; return false; });
+                InOrderTreeWalk(delegate(SortedSetV20<T>.Node n) { ret = n.Item; return false; });
                 return ret;
             }
         }
@@ -1677,7 +1677,7 @@ namespace System.Collections.Generic {
         public T Max {
             get {
                 T ret = default(T);
-                InOrderTreeWalk(delegate(SortedSet<T>.Node n) { ret = n.Item; return false; }, true);
+                InOrderTreeWalk(delegate(SortedSetV20<T>.Node n) { ret = n.Item; return false; }, true);
                 return ret;
             }
         }
@@ -1696,7 +1696,7 @@ namespace System.Collections.Generic {
         /// </summary>
         /// <param name="lowVestalue">Lowest Value allowed in the subset</param>
         /// <param name="highestValue">Highest Value allowed in the subset</param>        
-        public virtual SortedSet<T> GetViewBetween(T lowerValue, T upperValue) {
+        public virtual SortedSetV20<T> GetViewBetween(T lowerValue, T upperValue) {
             if (Comparer.Compare(lowerValue, upperValue) > 0) {
                 throw new ArgumentException("lowerBound is greater than upperBound");
             }
@@ -1722,11 +1722,11 @@ namespace System.Collections.Generic {
         /// <typeparam name="T"></typeparam>   
 #if !FEATURE_NETCORE
         [Serializable]
-        internal sealed class TreeSubSet : SortedSet<T>, ISerializable, IDeserializationCallback {
+        internal sealed class TreeSubSet : SortedSetV20<T>, ISerializable, IDeserializationCallback {
 #else
         internal sealed class TreeSubSet : SortedSet<T> {
 #endif
-            SortedSet<T> underlying;
+            SortedSetV20<T> underlying;
             T min, max;
             //these exist for unbounded collections
             //for instance, you could allow this subset to be defined for i>10. The set will throw if
@@ -1742,7 +1742,7 @@ namespace System.Collections.Generic {
             }
 #endif
 
-            public TreeSubSet(SortedSet<T> Underlying, T Min, T Max, bool lowerBoundActive, bool upperBoundActive)
+            public TreeSubSet(SortedSetV20<T> Underlying, T Min, T Max, bool lowerBoundActive, bool upperBoundActive)
                 : base(Underlying.Comparer) {
                 underlying = Underlying;
                 min = Min;
@@ -1854,7 +1854,7 @@ namespace System.Collections.Generic {
 
                 // The maximum height of a red-black tree is 2*lg(n+1).
                 // See page 264 of "Introduction to algorithms" by Thomas H. Cormen
-                Stack<Node> stack = new Stack<Node>(2 * (int)SortedSet<T>.log2(count + 1)); //this is not exactly right if count is out of date, but the stack can grow
+                Stack<Node> stack = new Stack<Node>(2 * (int)SortedSetV20<T>.log2(count + 1)); //this is not exactly right if count is out of date, but the stack can grow
                 Node current = root;
                 while (current != null) {
                     if (IsWithinRange(current.Item)) {
@@ -1916,7 +1916,7 @@ namespace System.Collections.Generic {
                 return true;
             }
 
-            internal override SortedSet<T>.Node FindNode(T item) {
+            internal override SortedSetV20<T>.Node FindNode(T item) {
 
                 if (!IsWithinRange(item)) {
                     return null;
@@ -1964,7 +1964,7 @@ namespace System.Collections.Generic {
             //This passes functionality down to the underlying tree, clipping edges if necessary
             //There's nothing gained by having a nested subset. May as well draw it from the base
             //Cannot increase the bounds of the subset, can only decrease it
-            public override SortedSet<T> GetViewBetween(T lowerValue, T upperValue) {
+            public override SortedSetV20<T> GetViewBetween(T lowerValue, T upperValue) {
 
                 if (lBoundActive && Comparer.Compare(min, lowerValue) > 0) {
                     //lBound = min;
@@ -2031,7 +2031,7 @@ namespace System.Collections.Generic {
                 min = (T)siInfo.GetValue(minName, typeof(T));
                 lBoundActive = siInfo.GetBoolean(lBoundActiveName);
                 uBoundActive = siInfo.GetBoolean(uBoundActiveName);
-                underlying = new SortedSet<T>();
+                underlying = new SortedSetV20<T>();
 
                 if (savedCount != 0) {
                     T[] items = (T[])siInfo.GetValue(ItemsName, typeof(T[]));
@@ -2153,20 +2153,20 @@ namespace System.Collections.Generic {
 #else
         public struct Enumerator : IEnumerator<T>, IEnumerator {
 #endif
-            private SortedSet<T> tree;
+            private SortedSetV20<T> tree;
             private int version;
 
 
-            private Stack<SortedSet<T>.Node> stack;
-            private SortedSet<T>.Node current;
-            static SortedSet<T>.Node dummyNode = new SortedSet<T>.Node(default(T));
+            private Stack<SortedSetV20<T>.Node> stack;
+            private SortedSetV20<T>.Node current;
+            static SortedSetV20<T>.Node dummyNode = new SortedSetV20<T>.Node(default(T));
 
             private bool reverse;
 
 #if !FEATURE_NETCORE
             private SerializationInfo siInfo;
 #endif
-            internal Enumerator(SortedSet<T> set) {
+            internal Enumerator(SortedSetV20<T> set) {
                 tree = set;
                 //this is a hack to make sure that the underlying subset has not been changed since
                 //
@@ -2175,7 +2175,7 @@ namespace System.Collections.Generic {
                 version = tree.version;
 
                 // 2lg(n + 1) is the maximum height
-                stack = new Stack<SortedSet<T>.Node>(2 * (int)SortedSet<T>.log2(set.Count + 1));
+                stack = new Stack<SortedSetV20<T>.Node>(2 * (int)SortedSetV20<T>.log2(set.Count + 1));
                 current = null;
                 reverse = false;
 #if !FEATURE_NETCORE
@@ -2184,7 +2184,7 @@ namespace System.Collections.Generic {
                 Intialize();
             }
 
-            internal Enumerator(SortedSet<T> set, bool reverse) {
+            internal Enumerator(SortedSetV20<T> set, bool reverse) {
                 tree = set;
                 //this is a hack to make sure that the underlying subset has not been changed since
                 //
@@ -2192,7 +2192,7 @@ namespace System.Collections.Generic {
                 version = tree.version;
 
                 // 2lg(n + 1) is the maximum height
-                stack = new Stack<SortedSet<T>.Node>(2 * (int)SortedSet<T>.log2(set.Count + 1));
+                stack = new Stack<SortedSetV20<T>.Node>(2 * (int)SortedSetV20<T>.log2(set.Count + 1));
                 current = null;
                 this.reverse = reverse;
 #if !FEATURE_NETCORE
@@ -2221,7 +2221,7 @@ namespace System.Collections.Generic {
                     ThrowHelper.ThrowArgumentNullException(ExceptionArgument.info);
 
                 }
-                info.AddValue(TreeName, tree, typeof(SortedSet<T>));
+                info.AddValue(TreeName, tree, typeof(SortedSetV20<T>));
                 info.AddValue(EnumVersionName, version);
                 info.AddValue(ReverseName, reverse);
                 info.AddValue(EnumStartName, !NotStartedOrEnded);
@@ -2237,11 +2237,11 @@ namespace System.Collections.Generic {
                     ThrowHelper.ThrowSerializationException(ExceptionResource.Serialization_InvalidOnDeser);
                 }
 
-                tree = (SortedSet<T>)siInfo.GetValue(TreeName, typeof(SortedSet<T>));
+                tree = (SortedSetV20<T>)siInfo.GetValue(TreeName, typeof(SortedSetV20<T>));
                 version = siInfo.GetInt32(EnumVersionName);
                 reverse = siInfo.GetBoolean(ReverseName);
                 bool EnumStarted = siInfo.GetBoolean(EnumStartName);
-                stack = new Stack<SortedSet<T>.Node>(2 * (int)SortedSet<T>.log2(tree.Count + 1));
+                stack = new Stack<SortedSetV20<T>.Node>(2 * (int)SortedSetV20<T>.log2(tree.Count + 1));
                 current = null;
                 if (EnumStarted) {
                     T item = (T)siInfo.GetValue(NodeValueName, typeof(T));
@@ -2261,7 +2261,7 @@ namespace System.Collections.Generic {
             private void Intialize() {
 
                 current = null;
-                SortedSet<T>.Node node = tree.root;
+                SortedSetV20<T>.Node node = tree.root;
                 Node next = null, other = null;
                 while (node != null) {
                     next = (reverse ? node.Right : node.Left);
@@ -2293,7 +2293,7 @@ namespace System.Collections.Generic {
                 }
 
                 current = stack.Pop();
-                SortedSet<T>.Node node = (reverse ? current.Left : current.Right);
+                SortedSetV20<T>.Node node = (reverse ? current.Left : current.Right);
                 Node next = null, other = null;
                 while (node != null) {
                     next = (reverse ? node.Right : node.Left);
@@ -2385,7 +2385,7 @@ namespace System.Collections.Generic {
     /// equality defined by the IComparer for this SortedSet be consistent with the default IEqualityComparer
     /// for the type T. If not, such an IEqualityComparer should be provided through the constructor.
     /// </summary>    
-    internal class SortedSetEqualityComparer<T> : IEqualityComparer<SortedSet<T>> {
+    internal class SortedSetEqualityComparer<T> : IEqualityComparer<SortedSetV20<T>> {
         private IComparer<T> comparer;
         private IEqualityComparer<T> e_comparer;
 
@@ -2412,12 +2412,12 @@ namespace System.Collections.Generic {
 
 
         // using comparer to keep equals properties in tact; don't want to choose one of the comparers
-        public bool Equals(SortedSet<T> x, SortedSet<T> y) {
-            return SortedSet<T>.SortedSetEquals(x, y, comparer);
+        public bool Equals(SortedSetV20<T> x, SortedSetV20<T> y) {
+            return SortedSetV20<T>.SortedSetEquals(x, y, comparer);
         }
         //IMPORTANT: this part uses the fact that GetHashCode() is consistent with the notion of equality in
         //the set
-        public int GetHashCode(SortedSet<T> obj) {
+        public int GetHashCode(SortedSetV20<T> obj) {
             int hashCode = 0;
             if (obj != null) {
                 foreach (T t in obj) {

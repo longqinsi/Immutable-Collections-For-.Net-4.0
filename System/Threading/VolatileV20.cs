@@ -5,7 +5,7 @@ using System.Security;
 
 namespace System.Threading
 {
-    public static class VolatileV40
+    public static class VolatileV20
     {
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
 

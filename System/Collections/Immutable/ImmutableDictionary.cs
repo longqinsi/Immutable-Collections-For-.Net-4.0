@@ -88,7 +88,7 @@ namespace System.Collections.Immutable
             return ToImmutableDictionary<TKey, TValue>(source, keyComparer, null);
         }
 
-        public static ImmutableDictionary<TKey, TSource> ToImmutableDictionary<TSource, TKey>(IEnumerable<TSource> source, Func<TSource, TKey> keySelector)
+        public static ImmutableDictionary<TKey, TSource> ToImmutableDictionary<TSource, TKey>(IEnumerable<TSource> source, FuncV20<TSource, TKey> keySelector)
         {
             return ToImmutableDictionary<TSource, TKey, TSource>(source, keySelector, delegate(TSource v)
             {
@@ -107,7 +107,7 @@ namespace System.Collections.Immutable
             return ImmutableDictionary<TKey, TValue>.Empty.WithComparers(keyComparer, valueComparer).AddRange(source);
         }
 
-        public static ImmutableDictionary<TKey, TSource> ToImmutableDictionary<TSource, TKey>(IEnumerable<TSource> source, Func<TSource, TKey> keySelector, IEqualityComparer<TKey> keyComparer)
+        public static ImmutableDictionary<TKey, TSource> ToImmutableDictionary<TSource, TKey>(IEnumerable<TSource> source, FuncV20<TSource, TKey> keySelector, IEqualityComparer<TKey> keyComparer)
         {
             return ToImmutableDictionary<TSource, TKey, TSource>(source, keySelector, delegate(TSource v)
             {
@@ -115,21 +115,21 @@ namespace System.Collections.Immutable
             }, keyComparer, null);
         }
 
-        public static ImmutableDictionary<TKey, TValue> ToImmutableDictionary<TSource, TKey, TValue>(IEnumerable<TSource> source, Func<TSource, TKey> keySelector, Func<TSource, TValue> elementSelector)
+        public static ImmutableDictionary<TKey, TValue> ToImmutableDictionary<TSource, TKey, TValue>(IEnumerable<TSource> source, FuncV20<TSource, TKey> keySelector, FuncV20<TSource, TValue> elementSelector)
         {
             return ToImmutableDictionary<TSource, TKey, TValue>(source, keySelector, elementSelector, null, null);
         }
 
-        public static ImmutableDictionary<TKey, TValue> ToImmutableDictionary<TSource, TKey, TValue>(IEnumerable<TSource> source, Func<TSource, TKey> keySelector, Func<TSource, TValue> elementSelector, IEqualityComparer<TKey> keyComparer)
+        public static ImmutableDictionary<TKey, TValue> ToImmutableDictionary<TSource, TKey, TValue>(IEnumerable<TSource> source, FuncV20<TSource, TKey> keySelector, FuncV20<TSource, TValue> elementSelector, IEqualityComparer<TKey> keyComparer)
         {
             return ToImmutableDictionary<TSource, TKey, TValue>(source, keySelector, elementSelector, keyComparer, null);
         }
 
-        public static ImmutableDictionary<TKey, TValue> ToImmutableDictionary<TSource, TKey, TValue>(IEnumerable<TSource> source, Func<TSource, TKey> keySelector, Func<TSource, TValue> elementSelector, IEqualityComparer<TKey> keyComparer, IEqualityComparer<TValue> valueComparer)
+        public static ImmutableDictionary<TKey, TValue> ToImmutableDictionary<TSource, TKey, TValue>(IEnumerable<TSource> source, FuncV20<TSource, TKey> keySelector, FuncV20<TSource, TValue> elementSelector, IEqualityComparer<TKey> keyComparer, IEqualityComparer<TValue> valueComparer)
         {
             Requires.NotNull<IEnumerable<TSource>>(source, "source");
-            Requires.NotNull<Func<TSource, TKey>>(keySelector, "keySelector");
-            Requires.NotNull<Func<TSource, TValue>>(elementSelector, "elementSelector");
+            Requires.NotNull<FuncV20<TSource, TKey>>(keySelector, "keySelector");
+            Requires.NotNull<FuncV20<TSource, TValue>>(elementSelector, "elementSelector");
             return ImmutableDictionary<TKey, TValue>.Empty.WithComparers(keyComparer, valueComparer).AddRange(Enumerable.Select<TSource, KeyValuePair<TKey, TValue>>(source, delegate (TSource element) {
                 return new KeyValuePair<TKey, TValue>(keySelector(element), elementSelector(element));
             }));
