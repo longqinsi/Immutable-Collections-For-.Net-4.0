@@ -40,7 +40,7 @@
             return empty;
         }
 
-        public static IImmutableStack<T> Pop<T>(this IImmutableStack<T> stack, out T value)
+        public static IImmutableStack<T> Pop<T>(IImmutableStack<T> stack, T value)
         {
             Requires.NotNull<IImmutableStack<T>>(stack, "stack");
             value = stack.Peek();

@@ -40,7 +40,7 @@
             return empty;
         }
 
-        public static IImmutableQueue<T> Dequeue<T>(this IImmutableQueue<T> queue, out T value)
+        public static IImmutableQueue<T> Dequeue<T>(IImmutableQueue<T> queue, T value)
         {
             Requires.NotNull<IImmutableQueue<T>>(queue, "queue");
             value = queue.Peek();

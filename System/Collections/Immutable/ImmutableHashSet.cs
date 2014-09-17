@@ -56,12 +56,12 @@
             return ImmutableHashSet<T>.Empty.WithComparer(equalityComparer).Union(items);
         }
 
-        public static ImmutableHashSet<TSource> ToImmutableHashSet<TSource>(this IEnumerable<TSource> source)
+        public static ImmutableHashSet<TSource> ToImmutableHashSet<TSource>(IEnumerable<TSource> source)
         {
-            return source.ToImmutableHashSet<TSource>(null);
+            return ToImmutableHashSet<TSource>(source, null);
         }
 
-        public static ImmutableHashSet<TSource> ToImmutableHashSet<TSource>(this IEnumerable<TSource> source, IEqualityComparer<TSource> equalityComparer)
+        public static ImmutableHashSet<TSource> ToImmutableHashSet<TSource>(IEnumerable<TSource> source, IEqualityComparer<TSource> equalityComparer)
         {
             ImmutableHashSet<TSource> set = source as ImmutableHashSet<TSource>;
             if (set != null)

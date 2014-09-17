@@ -13,7 +13,7 @@
 ** 
 ===========================================================*/
 using System;
-using System.Diagnostics.Contracts;
+
 using System.Runtime.CompilerServices;
 
 namespace System.Collections.Generic.V40
@@ -30,7 +30,7 @@ namespace System.Collections.Generic.V40
     [ContractClass(typeof(IReadOnlyCollectionContract<>))]
 #endif
     // If we ever implement more interfaces on IReadOnlyCollectionV40, we should also update RuntimeTypeCache.PopulateInterfaces() in rttype.cs
-    public interface IReadOnlyCollection<out T> : IEnumerable<T>
+    public interface IReadOnlyCollection<T> : IEnumerable<T>
     {
         int Count { get; }
     }

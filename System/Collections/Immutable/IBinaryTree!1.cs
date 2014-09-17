@@ -2,7 +2,7 @@
 {
     using System;
 
-    internal interface IBinaryTree<out T>
+    internal interface IBinaryTree<T>
     {
         int Count { get; }
 

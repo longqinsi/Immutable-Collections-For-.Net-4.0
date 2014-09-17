@@ -22,7 +22,7 @@ namespace System.Collections.Immutable
         IImmutableSet<T> Remove(T value);
         bool SetEquals(IEnumerable<T> other);
         IImmutableSet<T> SymmetricExcept(IEnumerable<T> other);
-        bool TryGetValue(T equalValue, out T actualValue);
+        bool TryGetValue(T equalValue, T actualValue);
         IImmutableSet<T> Union(IEnumerable<T> other);
     }
 }

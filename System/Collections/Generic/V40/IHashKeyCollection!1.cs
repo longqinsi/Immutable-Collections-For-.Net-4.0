@@ -1,6 +1,6 @@
 ﻿namespace System.Collections.Generic.V40
 {
-    internal interface IHashKeyCollection<in TKey>
+    internal interface IHashKeyCollection<TKey>
     {
         IEqualityComparer<TKey> KeyComparer { get; }
     }

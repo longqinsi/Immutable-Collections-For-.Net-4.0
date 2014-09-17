@@ -53,17 +53,17 @@
             return ImmutableSortedDictionary<TKey, TValue>.Empty.WithComparers(keyComparer, valueComparer).AddRange(items);
         }
 
-        public static ImmutableSortedDictionary<TKey, TValue> ToImmutableSortedDictionary<TKey, TValue>(this IEnumerable<KeyValuePair<TKey, TValue>> source)
+        public static ImmutableSortedDictionary<TKey, TValue> ToImmutableSortedDictionary<TKey, TValue>(IEnumerable<KeyValuePair<TKey, TValue>> source)
         {
-            return source.ToImmutableSortedDictionary<TKey, TValue>(null, null);
+            return ToImmutableSortedDictionary<TKey, TValue>(source, null, null);
         }
 
-        public static ImmutableSortedDictionary<TKey, TValue> ToImmutableSortedDictionary<TKey, TValue>(this IEnumerable<KeyValuePair<TKey, TValue>> source, IComparer<TKey> keyComparer)
+        public static ImmutableSortedDictionary<TKey, TValue> ToImmutableSortedDictionary<TKey, TValue>(IEnumerable<KeyValuePair<TKey, TValue>> source, IComparer<TKey> keyComparer)
         {
-            return source.ToImmutableSortedDictionary<TKey, TValue>(keyComparer, null);
+            return ToImmutableSortedDictionary<TKey, TValue>(source, keyComparer, null);
         }
 
-        public static ImmutableSortedDictionary<TKey, TValue> ToImmutableSortedDictionary<TKey, TValue>(this IEnumerable<KeyValuePair<TKey, TValue>> source, IComparer<TKey> keyComparer, IEqualityComparer<TValue> valueComparer)
+        public static ImmutableSortedDictionary<TKey, TValue> ToImmutableSortedDictionary<TKey, TValue>(IEnumerable<KeyValuePair<TKey, TValue>> source, IComparer<TKey> keyComparer, IEqualityComparer<TValue> valueComparer)
         {
             Requires.NotNull<IEnumerable<KeyValuePair<TKey, TValue>>>(source, "source");
             ImmutableSortedDictionary<TKey, TValue> dictionaryV40 = source as ImmutableSortedDictionary<TKey, TValue>;
@@ -74,17 +74,17 @@
             return ImmutableSortedDictionary<TKey, TValue>.Empty.WithComparers(keyComparer, valueComparer).AddRange(source);
         }
 
-        public static ImmutableSortedDictionary<TKey, TValue> ToImmutableSortedDictionary<TSource, TKey, TValue>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector, Func<TSource, TValue> elementSelector)
+        public static ImmutableSortedDictionary<TKey, TValue> ToImmutableSortedDictionary<TSource, TKey, TValue>(IEnumerable<TSource> source, Func<TSource, TKey> keySelector, Func<TSource, TValue> elementSelector)
         {
-            return source.ToImmutableSortedDictionary<TSource, TKey, TValue>(keySelector, elementSelector, null, null);
+            return ToImmutableSortedDictionary<TSource, TKey, TValue>(source, keySelector, elementSelector, null, null);
         }
 
-        public static ImmutableSortedDictionary<TKey, TValue> ToImmutableSortedDictionary<TSource, TKey, TValue>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector, Func<TSource, TValue> elementSelector, IComparer<TKey> keyComparer)
+        public static ImmutableSortedDictionary<TKey, TValue> ToImmutableSortedDictionary<TSource, TKey, TValue>(IEnumerable<TSource> source, Func<TSource, TKey> keySelector, Func<TSource, TValue> elementSelector, IComparer<TKey> keyComparer)
         {
-            return source.ToImmutableSortedDictionary<TSource, TKey, TValue>(keySelector, elementSelector, keyComparer, null);
+            return ToImmutableSortedDictionary<TSource, TKey, TValue>(source, keySelector, elementSelector, keyComparer, null);
         }
 
-        public static ImmutableSortedDictionary<TKey, TValue> ToImmutableSortedDictionary<TSource, TKey, TValue>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector, Func<TSource, TValue> elementSelector, IComparer<TKey> keyComparer, IEqualityComparer<TValue> valueComparer)
+        public static ImmutableSortedDictionary<TKey, TValue> ToImmutableSortedDictionary<TSource, TKey, TValue>(IEnumerable<TSource> source, Func<TSource, TKey> keySelector, Func<TSource, TValue> elementSelector, IComparer<TKey> keyComparer, IEqualityComparer<TValue> valueComparer)
         {
             Requires.NotNull<IEnumerable<TSource>>(source, "source");
             Requires.NotNull<Func<TSource, TKey>>(keySelector, "keySelector");

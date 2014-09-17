@@ -14,7 +14,7 @@ namespace System.Collections.Immutable
 
     internal static class ImmutableExtensions
     {
-        internal static IOrderedCollection<T> AsOrderedCollection<T>(this IEnumerable<T> sequence)
+        internal static IOrderedCollection<T> AsOrderedCollection<T>(IEnumerable<T> sequence)
         {
             Requires.NotNull<IEnumerable<T>>(sequence, "sequence");
             IOrderedCollection<T> ordereds = sequence as IOrderedCollection<T>;
@@ -33,7 +33,7 @@ namespace System.Collections.Immutable
         internal static int GetCount<T>(ref IEnumerable<T> sequence)
         {
             int num;
-            if (!sequence.TryGetCount<T>(out num))
+            if (!TryGetCount<T>(sequence, out num))
             {
                 List<T> list = Enumerable.ToList<T>(sequence);
                 num = list.Count;
@@ -42,7 +42,7 @@ namespace System.Collections.Immutable
             return num;
         }
 
-        internal static T[] ToArray<T>(this IEnumerable<T> sequence, int count)
+        internal static T[] ToArray<T>(IEnumerable<T> sequence, int count)
         {
             Requires.NotNull<IEnumerable<T>>(sequence, "sequence");
             Requires.Range(count >= 0, "count", null);
@@ -57,7 +57,7 @@ namespace System.Collections.Immutable
             return localArray;
         }
 
-        internal static bool TryGetCount<T>(this IEnumerable sequence, out int count)
+        internal static bool TryGetCount<T>(IEnumerable sequence, out int count)
         {
             ICollection is2 = sequence as ICollection;
             if (is2 != null)
@@ -81,9 +81,9 @@ namespace System.Collections.Immutable
             return false;
         }
 
-        internal static bool TryGetCount<T>(this IEnumerable<T> sequence, out int count)
+        internal static bool TryGetCount<T>(IEnumerable<T> sequence, out int count)
         {
-            return ((IEnumerable) sequence).TryGetCount<T>(out count);
+            return TryGetCount<T>(sequence, out count);
         }
 
         private class FallbackWrapper<T> : IOrderedCollection<T>, IEnumerable<T>, IEnumerable
@@ -114,7 +114,7 @@ namespace System.Collections.Immutable
                     if (this.collection == null)
                     {
                         int num;
-                        if (this.sequence.TryGetCount<T>(out num))
+                        if (TryGetCount<T>(sequence, out num))
                         {
                             return num;
                         }

@@ -56,12 +56,12 @@
             return ImmutableSortedSet<T>.Empty.WithComparer(comparer).Union(items);
         }
 
-        public static ImmutableSortedSet<TSource> ToImmutableSortedSet<TSource>(this IEnumerable<TSource> source)
+        public static ImmutableSortedSet<TSource> ToImmutableSortedSet<TSource>(IEnumerable<TSource> source)
         {
-            return source.ToImmutableSortedSet<TSource>(null);
+            return ToImmutableSortedSet<TSource>(source, null);
         }
 
-        public static ImmutableSortedSet<TSource> ToImmutableSortedSet<TSource>(this IEnumerable<TSource> source, IComparer<TSource> comparer)
+        public static ImmutableSortedSet<TSource> ToImmutableSortedSet<TSource>(IEnumerable<TSource> source, IComparer<TSource> comparer)
         {
             ImmutableSortedSet<TSource> set = source as ImmutableSortedSet<TSource>;
             if (set != null)

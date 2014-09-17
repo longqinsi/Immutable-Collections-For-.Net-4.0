@@ -5,7 +5,7 @@
     using System.Collections.Generic;
     using System.Reflection;
 
-    internal interface IOrderedCollection<out T> : IEnumerable<T>, IEnumerable
+    internal interface IOrderedCollection<T> : IEnumerable<T>, IEnumerable
     {
         int Count { get; }
 

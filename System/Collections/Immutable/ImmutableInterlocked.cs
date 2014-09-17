@@ -162,7 +162,7 @@
             return true;
         }
 
-        public static bool TryDequeue<T>(ref ImmutableQueue<T> location, out T value)
+        public static bool TryDequeue<T>(ref ImmutableQueue<T> location, T value)
         {
             bool flag;
             ImmutableQueue<T> queue = VolatileV40.Read<ImmutableQueue<T>>(ref location);
@@ -183,7 +183,7 @@
             return true;
         }
 
-        public static bool TryPop<T>(ref ImmutableStack<T> location, out T value)
+        public static bool TryPop<T>(ref ImmutableStack<T> location, T value)
         {
             bool flag;
             ImmutableStack<T> stack = VolatileV40.Read<ImmutableStack<T>>(ref location);

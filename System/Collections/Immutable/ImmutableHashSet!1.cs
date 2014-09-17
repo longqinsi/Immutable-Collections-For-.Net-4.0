@@ -227,7 +227,7 @@ namespace System.Collections.Immutable
             Requires.NotNull<IEnumerable<T>>(other, "other");
             if (origin.Root.IsEmpty)
             {
-                return other.Any<T>();
+                return Enumerable.Any<T>(other);
             }
             HashSet<T> ts = new HashSet<T>(other, origin.EqualityComparer);
             if (origin.Count >= ts.Count)
@@ -601,7 +601,7 @@ namespace System.Collections.Immutable
             return new ImmutableHashSet<T>.Builder(this);
         }
 
-        public Boolean TryGetValue(T equalValue, out T actualValue)
+        public Boolean TryGetValue(T equalValue, T actualValue)
         {
             ImmutableHashSet<T>.HashBucket hashBucket;
             Requires.NotNullAllowStructs<T>(equalValue, "value");
@@ -939,7 +939,7 @@ namespace System.Collections.Immutable
                 {
                     if (this.contents == null)
                     {
-                        this.contents = this.@set.ToArray<T>(this.@set.Count);
+                        this.contents = ImmutableExtensions.ToArray<T>(this.@set, this.@set.Count);
                     }
                     return this.contents;
                 }

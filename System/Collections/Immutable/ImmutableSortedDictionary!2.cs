@@ -830,7 +830,7 @@ namespace System.Collections.Immutable
             {
                 get
                 {
-                    return this.Root.Keys.ToArray<TKey>(this.Count);
+                    return ImmutableExtensions.ToArray<TKey>(this.Root.Keys, this.Count);
                 }
             }
 
@@ -838,7 +838,7 @@ namespace System.Collections.Immutable
             {
                 get
                 {
-                    return this.Root.Values.ToArray<TValue>(this.Count);
+                    return ImmutableExtensions.ToArray<TValue>(this.Root.Values, this.Count);
                 }
             }
 
@@ -896,7 +896,7 @@ namespace System.Collections.Immutable
             {
                 get
                 {
-                    return this.Keys.ToArray<TKey>(this.Count);
+                    return ImmutableExtensions.ToArray<TKey>(this.Keys, this.Count);
                 }
             }
 
@@ -904,7 +904,7 @@ namespace System.Collections.Immutable
             {
                 get
                 {
-                    return this.Values.ToArray<TValue>(this.Count);
+                    return ImmutableExtensions.ToArray<TValue>(this.Values, this.Count);
                 }
             }
 
@@ -959,7 +959,7 @@ namespace System.Collections.Immutable
                     {
                         if (this.contents == null)
                         {
-                            this.contents = this.map.ToArray<KeyValuePair<TKey, TValue>>(this.map.Count);
+                            this.contents = ImmutableExtensions.ToArray<KeyValuePair<TKey, TValue>>(this.map, this.map.Count);
                         }
                         return this.contents;
                     }
@@ -985,7 +985,7 @@ namespace System.Collections.Immutable
                 {
                     if (this.contents == null)
                     {
-                        this.contents = this.map.ToArray<KeyValuePair<TKey, TValue>>(this.map.Count);
+                        this.contents = ImmutableExtensions.ToArray<KeyValuePair<TKey, TValue>>(this.map, this.map.Count);
                     }
                     return this.contents;
                 }
@@ -1378,7 +1378,7 @@ namespace System.Collections.Immutable
             internal static ImmutableSortedDictionary<TKey, TValue>.Node NodeTreeFromSortedDictionary(SortedDictionary<TKey, TValue> dictionary)
             {
                 Requires.NotNull<SortedDictionary<TKey, TValue>>(dictionary, "dictionaryV40");
-                IOrderedCollection<KeyValuePair<TKey, TValue>> items = ((IEnumerable<KeyValuePair<TKey, TValue>>) dictionary).AsOrderedCollection<KeyValuePair<TKey, TValue>>();
+                IOrderedCollection<KeyValuePair<TKey, TValue>> items = ImmutableExtensions.AsOrderedCollection<KeyValuePair<TKey, TValue>>(((IEnumerable<KeyValuePair<TKey, TValue>>)dictionary));
                 return ImmutableSortedDictionary<TKey, TValue>.Node.NodeTreeFromList(items, 0, items.Count);
             }
 

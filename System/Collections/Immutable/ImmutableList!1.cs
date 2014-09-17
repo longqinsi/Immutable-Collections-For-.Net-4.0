@@ -121,7 +121,7 @@ namespace System.Collections.Immutable
             {
                 return listV40;
             }
-            IOrderedCollection<T> ordereds = items.AsOrderedCollection<T>();
+            IOrderedCollection<T> ordereds = ImmutableExtensions.AsOrderedCollection<T>(items);
             if (ordereds.Count == 0)
             {
                 return (ImmutableList<T>) this;
@@ -217,7 +217,7 @@ namespace System.Collections.Immutable
 
         public int IndexOf(T value)
         {
-            return this.IndexOf<T>(value, ((IEqualityComparer<T>) EqualityComparer<T>.Default));
+            return ImmutableList.IndexOf<T>(this, value, ((IEqualityComparer<T>)EqualityComparer<T>.Default));
         }
 
         public int IndexOf(T item, int index, int count, IEqualityComparer<T> equalityComparer)
@@ -255,7 +255,7 @@ namespace System.Collections.Immutable
 
         public ImmutableList<T> Remove(T value, IEqualityComparer<T> equalityComparer)
         {
-            int index = this.IndexOf<T>(value, equalityComparer);
+            int index = ImmutableList.IndexOf<T>(this, value, equalityComparer);
             if (index >= 0)
             {
                 return this.RemoveAt(index);
@@ -322,7 +322,7 @@ namespace System.Collections.Immutable
         public ImmutableList<T> Replace(T oldValue, T newValue, IEqualityComparer<T> equalityComparer)
         {
             Requires.NotNull<IEqualityComparer<T>>(equalityComparer, "equalityComparer");
-            int index = this.IndexOf<T>(oldValue, equalityComparer);
+            int index = ImmutableList.IndexOf<T>(this, oldValue, equalityComparer);
             if (index < 0)
             {
                 throw new ArgumentException(Strings.CannotFindOldValue, "oldValue");
@@ -1141,7 +1141,7 @@ namespace System.Collections.Immutable
                 {
                     if (this.cachedContents == null)
                     {
-                        this.cachedContents = this.list.ToArray<T>(this.list.Count);
+                        this.cachedContents = ImmutableExtensions.ToArray<T>(this.list, this.list.Count);
                     }
                     return this.cachedContents;
                 }
@@ -1993,7 +1993,7 @@ namespace System.Collections.Immutable
                 T[] array = new T[this.Count];
                 this.CopyTo(array);
                 Array.Sort<T>(array, comparison);
-                return ImmutableList<T>.Node.NodeTreeFromList(array.AsOrderedCollection<T>(), 0, this.Count);
+                return ImmutableList<T>.Node.NodeTreeFromList(ImmutableExtensions.AsOrderedCollection<T>(array), 0, this.Count);
             }
 
             internal ImmutableList<T>.Node Sort(int index, int count, IComparer<T> comparer)
@@ -2005,7 +2005,7 @@ namespace System.Collections.Immutable
                 T[] array = new T[this.Count];
                 this.CopyTo(array);
                 Array.Sort<T>(array, index, count, comparer);
-                return ImmutableList<T>.Node.NodeTreeFromList(array.AsOrderedCollection<T>(), 0, this.Count);
+                return ImmutableList<T>.Node.NodeTreeFromList(ImmutableExtensions.AsOrderedCollection<T>(array), 0, this.Count);
             }
 
             IEnumerator<T> IEnumerable<T>.GetEnumerator()

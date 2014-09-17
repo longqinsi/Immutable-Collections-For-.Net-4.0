@@ -338,7 +338,7 @@ namespace System.Collections.Immutable
 
         public Boolean ContainsValue(TValue value)
         {
-            return this.Values.Contains<TValue>(value, this.ValueComparer);
+            return Enumerable.Contains<TValue>(this.Values, value, this.ValueComparer);
         }
 
         private static ImmutableDictionary<TKey, TValue> EmptyWithComparers(ImmutableDictionary<TKey, TValue>.Comparers comparers)
@@ -729,7 +729,7 @@ namespace System.Collections.Immutable
             {
                 get
                 {
-                    return this.root.Values.SelectMany<ImmutableDictionary<TKey, TValue>.HashBucket, KeyValuePair<TKey, TValue>>((ImmutableDictionary<TKey, TValue>.HashBucket b) => b).Select<KeyValuePair<TKey, TValue>, TKey>((KeyValuePair<TKey, TValue> kv) => kv.Key);
+                    return Enumerable.Select<KeyValuePair<TKey, TValue>, TKey>(Enumerable.SelectMany<ImmutableDictionary<TKey, TValue>.HashBucket, KeyValuePair<TKey, TValue>>(this.root.Values, (ImmutableDictionary<TKey, TValue>.HashBucket b) => b), ((KeyValuePair<TKey, TValue> kv) => kv.Key));
                 }
             }
 
@@ -771,7 +771,7 @@ namespace System.Collections.Immutable
             {
                 get
                 {
-                    return this.Keys.ToArray<TKey>(this.Count);
+                    return ImmutableExtensions.ToArray<TKey>(this.Keys, this.Count);
                 }
             }
 
@@ -779,7 +779,7 @@ namespace System.Collections.Immutable
             {
                 get
                 {
-                    return this.Values.ToArray<TValue>(this.Count);
+                    return ImmutableExtensions.ToArray<TValue>(this.Values, this.Count);
                 }
             }
 
@@ -837,7 +837,8 @@ namespace System.Collections.Immutable
             {
                 get
                 {
-                    return this.Keys.ToArray<TKey>(this.Count);
+                    return ImmutableExtensions.ToArray<TKey>(this.Keys, this.Count);
+
                 }
             }
 
@@ -845,7 +846,8 @@ namespace System.Collections.Immutable
             {
                 get
                 {
-                    return this.Values.ToArray<TValue>(this.Count);
+                    return ImmutableExtensions.ToArray<TValue>(this.Values, this.Count);
+
                 }
             }
 
@@ -870,7 +872,7 @@ namespace System.Collections.Immutable
             {
                 get
                 {
-                    return this.root.Values.SelectMany<ImmutableDictionary<TKey, TValue>.HashBucket, KeyValuePair<TKey, TValue>>((ImmutableDictionary<TKey, TValue>.HashBucket b) => b).Select<KeyValuePair<TKey, TValue>, TValue>((KeyValuePair<TKey, TValue> kv) => kv.Value).ToArray<TValue>(this.Count);
+                    return ImmutableExtensions.ToArray<TValue>(Enumerable.Select<KeyValuePair<TKey, TValue>, TValue>(Enumerable.SelectMany<ImmutableDictionary<TKey, TValue>.HashBucket, KeyValuePair<TKey, TValue>>(this.root.Values, (ImmutableDictionary<TKey, TValue>.HashBucket b) => b), (KeyValuePair<TKey, TValue> kv) => kv.Value), this.Count);
                 }
             }
 
@@ -934,7 +936,7 @@ namespace System.Collections.Immutable
 
             public Boolean ContainsValue(TValue value)
             {
-                return this.Values.Contains<TValue>(value, this.ValueComparer);
+                return Enumerable.Contains<TValue>(this.Values, value, this.ValueComparer);
             }
 
             public ImmutableDictionary<TKey, TValue>.Enumerator GetEnumerator()
@@ -1071,7 +1073,7 @@ namespace System.Collections.Immutable
                     {
                         if (this.contents == null)
                         {
-                            this.contents = this.map.ToArray<KeyValuePair<TKey, TValue>>(this.map.Count);
+                            this.contents = ImmutableExtensions.ToArray<KeyValuePair<TKey, TValue>>(this.map, this.map.Count);
                         }
                         return this.contents;
                     }
@@ -1199,7 +1201,7 @@ namespace System.Collections.Immutable
                 {
                     if (this.contents == null)
                     {
-                        this.contents = this.map.ToArray<KeyValuePair<TKey, TValue>>(this.map.Count);
+                        this.contents = ImmutableExtensions.ToArray<KeyValuePair<TKey, TValue>>(this.map, this.map.Count);
                     }
                     return this.contents;
                 }

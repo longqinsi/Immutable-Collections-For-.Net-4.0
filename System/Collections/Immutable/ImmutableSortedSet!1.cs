@@ -422,7 +422,7 @@ namespace System.Collections.Immutable
             return false;
         }
 
-        public bool TryGetValue(T equalValue, out T actualValue)
+        public bool TryGetValue(T equalValue, T actualValue)
         {
             Requires.NotNullAllowStructs<T>(equalValue, "equalValue");
             Node node = this.root.Search(equalValue, this.comparer);
@@ -455,7 +455,7 @@ namespace System.Collections.Immutable
                     return set.Union(this);
                 }
             }
-            if (!this.IsEmpty && (!other.TryGetCount<T>(out num) || (((this.Count + num) * 0.15f) <= this.Count)))
+            if (!this.IsEmpty && (!ImmutableExtensions.TryGetCount<T>(other, out num) || (((this.Count + num) * 0.15f) <= this.Count)))
             {
                 return this.UnionIncremental(other);
             }
@@ -902,7 +902,7 @@ namespace System.Collections.Immutable
                     {
                         if (this.contents == null)
                         {
-                            this.contents = this.set.ToArray<T>(this.set.Count);
+                            this.contents = ImmutableExtensions.ToArray<T>(this.set, this.set.Count);
                         }
                         return this.contents;
                     }
@@ -928,7 +928,7 @@ namespace System.Collections.Immutable
                 {
                     if (this.contents == null)
                     {
-                        this.contents = this.set.ToArray<T>(this.set.Count);
+                        this.contents = ImmutableExtensions.ToArray<T>(this.set, this.set.Count);
                     }
                     return this.contents;
                 }
@@ -1350,7 +1350,7 @@ namespace System.Collections.Immutable
                 {
                     return ImmutableSortedSet<T>.Node.EmptyNode;
                 }
-                IOrderedCollection<T> items = ((IEnumerable<T>) collection).AsOrderedCollection<T>();
+                IOrderedCollection<T> items = ImmutableExtensions.AsOrderedCollection<T>(collection);
                 return ImmutableSortedSet<T>.Node.NodeTreeFromList(items, 0, items.Count);
             }
 

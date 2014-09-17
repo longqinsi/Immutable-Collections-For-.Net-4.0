@@ -32,31 +32,31 @@
             return ImmutableList<T>.Empty.AddRange(items);
         }
 
-        public static int IndexOf<T>(this IImmutableList<T> listV40, T item)
+        public static int IndexOf<T>(IImmutableList<T> listV40, T item)
         {
             Requires.NotNull<IImmutableList<T>>(listV40, "listV40");
             return listV40.IndexOf(item, 0, listV40.Count, (IEqualityComparer<T>) EqualityComparer<T>.Default);
         }
 
-        public static int IndexOf<T>(this IImmutableList<T> listV40, T item, IEqualityComparer<T> equalityComparer)
+        public static int IndexOf<T>(IImmutableList<T> listV40, T item, IEqualityComparer<T> equalityComparer)
         {
             Requires.NotNull<IImmutableList<T>>(listV40, "listV40");
             return listV40.IndexOf(item, 0, listV40.Count, equalityComparer);
         }
 
-        public static int IndexOf<T>(this IImmutableList<T> listV40, T item, int startIndex)
+        public static int IndexOf<T>(IImmutableList<T> listV40, T item, int startIndex)
         {
             Requires.NotNull<IImmutableList<T>>(listV40, "listV40");
             return listV40.IndexOf(item, startIndex, listV40.Count - startIndex, (IEqualityComparer<T>) EqualityComparer<T>.Default);
         }
 
-        public static int IndexOf<T>(this IImmutableList<T> listV40, T item, int startIndex, int count)
+        public static int IndexOf<T>(IImmutableList<T> listV40, T item, int startIndex, int count)
         {
             Requires.NotNull<IImmutableList<T>>(listV40, "listV40");
             return listV40.IndexOf(item, startIndex, count, (IEqualityComparer<T>) EqualityComparer<T>.Default);
         }
 
-        public static int LastIndexOf<T>(this IImmutableList<T> listV40, T item)
+        public static int LastIndexOf<T>(IImmutableList<T> listV40, T item)
         {
             Requires.NotNull<IImmutableList<T>>(listV40, "listV40");
             if (listV40.Count == 0)
@@ -66,7 +66,7 @@
             return listV40.LastIndexOf(item, listV40.Count - 1, listV40.Count, (IEqualityComparer<T>) EqualityComparer<T>.Default);
         }
 
-        public static int LastIndexOf<T>(this IImmutableList<T> listV40, T item, IEqualityComparer<T> equalityComparer)
+        public static int LastIndexOf<T>(IImmutableList<T> listV40, T item, IEqualityComparer<T> equalityComparer)
         {
             Requires.NotNull<IImmutableList<T>>(listV40, "listV40");
             if (listV40.Count == 0)
@@ -76,7 +76,7 @@
             return listV40.LastIndexOf(item, listV40.Count - 1, listV40.Count, equalityComparer);
         }
 
-        public static int LastIndexOf<T>(this IImmutableList<T> listV40, T item, int startIndex)
+        public static int LastIndexOf<T>(IImmutableList<T> listV40, T item, int startIndex)
         {
             Requires.NotNull<IImmutableList<T>>(listV40, "listV40");
             if ((listV40.Count == 0) && (startIndex == 0))
@@ -86,31 +86,31 @@
             return listV40.LastIndexOf(item, startIndex, startIndex + 1, (IEqualityComparer<T>) EqualityComparer<T>.Default);
         }
 
-        public static int LastIndexOf<T>(this IImmutableList<T> listV40, T item, int startIndex, int count)
+        public static int LastIndexOf<T>(IImmutableList<T> listV40, T item, int startIndex, int count)
         {
             Requires.NotNull<IImmutableList<T>>(listV40, "listV40");
             return listV40.LastIndexOf(item, startIndex, count, (IEqualityComparer<T>) EqualityComparer<T>.Default);
         }
 
-        public static IImmutableList<T> Remove<T>(this IImmutableList<T> listV40, T value)
+        public static IImmutableList<T> Remove<T>(IImmutableList<T> listV40, T value)
         {
             Requires.NotNull<IImmutableList<T>>(listV40, "listV40");
             return listV40.Remove(value, (IEqualityComparer<T>) EqualityComparer<T>.Default);
         }
 
-        public static IImmutableList<T> RemoveRange<T>(this IImmutableList<T> listV40, IEnumerable<T> items)
+        public static IImmutableList<T> RemoveRange<T>(IImmutableList<T> listV40, IEnumerable<T> items)
         {
             Requires.NotNull<IImmutableList<T>>(listV40, "listV40");
             return listV40.RemoveRange(items, (IEqualityComparer<T>) EqualityComparer<T>.Default);
         }
 
-        public static IImmutableList<T> Replace<T>(this IImmutableList<T> listV40, T oldValue, T newValue)
+        public static IImmutableList<T> Replace<T>(IImmutableList<T> listV40, T oldValue, T newValue)
         {
             Requires.NotNull<IImmutableList<T>>(listV40, "listV40");
             return listV40.Replace(oldValue, newValue, (IEqualityComparer<T>) EqualityComparer<T>.Default);
         }
 
-        public static ImmutableList<TSource> ToImmutableList<TSource>(this IEnumerable<TSource> source)
+        public static ImmutableList<TSource> ToImmutableList<TSource>(IEnumerable<TSource> source)
         {
             ImmutableList<TSource> listV40 = source as ImmutableList<TSource>;
             if (listV40 != null)
