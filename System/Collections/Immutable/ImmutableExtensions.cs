@@ -83,7 +83,7 @@ namespace System.Collections.Immutable
 
         internal static bool TryGetCount<T>(IEnumerable<T> sequence, out int count)
         {
-            return TryGetCount<T>(sequence, out count);
+            return TryGetCount<T>(sequence as IEnumerable, out count);
         }
 
         private class FallbackWrapper<T> : IOrderedCollection<T>, IEnumerable<T>, IEnumerable
