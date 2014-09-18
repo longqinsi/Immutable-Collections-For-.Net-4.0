@@ -2053,6 +2053,338 @@ namespace System.Linq
         public static decimal? Average<TSource>(IEnumerable<TSource> source, FuncV20<TSource, decimal?> selector) {
             return EnumerableV20.Average(EnumerableV20.Select(source, selector));
         }
+
+        #region Added by longqinsi 2014/09/18
+        /// <summary>对 IEnumerable&lt;T&gt;的每个元素执行指定操作</summary>
+        /// <typeparam name="T">IEnumerable&lt;T&gt;序列的元素类型</typeparam>
+        /// <param name="enumerable">IEnumerable&lt;T&gt;序列</param>
+        /// <param name="action">要对IEnumerable&lt;T&gt;的每个元素执行的 Action&lt;T&gt;委托。</param>
+        /// <exception cref="ArgumentNullException"><paramref name="enumerable"/>或<paramref name="action"/>的值为null。</exception>
+        public static void ForEach<T>(IEnumerable<T> enumerable, Action<T> action)
+        {
+            if (enumerable == null)
+            {
+                throw new ArgumentNullException("enumerable");
+            }
+            if (action == null)
+            {
+                throw new ArgumentNullException("action");
+            }
+            foreach (var item in enumerable)
+            {
+                action(item);
+            }
+        }
+
+        /// <summary>
+        /// 对两个枚举数进行比较。
+        /// </summary>
+        /// <remarks>
+        /// 将对两个枚举数的元素挨个比较。如果任意一次比较不相等，就以该次比较的结果作为最终比较结果。
+        /// 如果如此比较到其中一个枚举数的元素已经枚举完毕，那么：
+        /// 1.如果另一个枚举数也已枚举完毕，则两者相等；
+        /// 2.否则，则以仍有剩余元素者为大。
+        /// </remarks>
+        /// <typeparam name="TSource">枚举的对象的类型</typeparam>
+        /// <param name="x">要比较的第一个枚举数</param>
+        /// <param name="y">要比较的第二个枚举数</param>
+        /// <param name="comparison">比较元素时要使用的 <see cref="System.Comparison&lt;T&gt;"/></param>
+        /// <returns>一个有符号整数，指示 <paramref name="x"/> 与 <paramref name="y"/> 的相对值，如下表所示。
+        /// <list type="table">
+        ///    <listheader>
+        ///        <term>值</term>
+        ///        <description>含义</description>
+        ///    </listheader>
+        ///    <item>
+        ///        <term>小于0</term>
+        ///        <description><paramref name="x"/>小于<paramref name="y"/></description>
+        ///    </item>
+        ///    <item>
+        ///        <term>0</term>
+        ///        <description><paramref name="x"/>等于<paramref name="y"/></description>
+        ///    </item>
+        ///    <item>
+        ///        <term>大于0</term>
+        ///        <description><paramref name="x"/>大于<paramref name="y"/></description>
+        ///    </item>
+        ///</list>
+        /// </returns>
+        /// <exception cref="ArgumentNullException"><paramref name="x"/>, <paramref name="y"/>或<paramref name="comparison"/>等于null。</exception>
+        /// <exception cref="ArgumentException"><paramref name="comparison"/> 的实现导致比较时出现错误。 例如，将某个项与其自身进行比较时，<paramref name="comparison"/> 可能不返回 0。</exception>
+        public static int CompareTo<TSource>(IEnumerable<TSource> x, IEnumerable<TSource> y, Comparison<TSource> comparison)
+        {
+            if (x == null)
+            {
+                throw new ArgumentNullException("x");
+            }
+            if (y == null)
+            {
+                throw new ArgumentNullException("y");
+            }
+            if (comparison == null)
+            {
+                throw new ArgumentNullException("comparison");
+            }
+            var enumeratorX = x.GetEnumerator();
+            var enumeratorY = y.GetEnumerator();
+            while (true)
+            {
+                if (!enumeratorX.MoveNext())
+                {
+                    if (!enumeratorY.MoveNext())
+                    {
+                        return 0;
+                    }
+                    return -1;
+                }
+                if (!enumeratorY.MoveNext())
+                {
+                    return 1;
+                }
+                var currentCompareResult = comparison(enumeratorX.Current, enumeratorY.Current);
+                if (currentCompareResult != 0)
+                {
+                    return currentCompareResult;
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// 使用指定的比较器对两个枚举数进行比较。
+        /// </summary>
+        /// <remarks>
+        /// 将对两个枚举数的元素挨个比较。如果任意一次比较不相等，就以该次比较的结果作为最终比较结果。
+        /// 如果如此比较到其中一个枚举数的元素已经枚举完毕，那么：
+        /// 1.如果另一个枚举数也已枚举完毕，则两者相等；
+        /// 2.否则，则以仍有剩余元素者为大。
+        /// </remarks>
+        /// <typeparam name="TSource">枚举的对象的类型</typeparam>
+        /// <param name="x">要比较的第一个枚举数</param>
+        /// <param name="y">要比较的第二个枚举数</param>
+        /// <param name="comparer">比较元素时要使用的 <see cref="IComparer&lt;T&gt;"/> 实现，或者为null，表示使用默认比较器 <see cref="Comparer&lt;T&gt;.Default"/></param>
+        /// <returns>一个有符号整数，指示 <paramref name="x"/> 与 <paramref name="y"/> 的相对值，如下表所示。
+        /// <list type="table">
+        ///    <listheader>
+        ///        <term>值</term>
+        ///        <description>含义</description>
+        ///    </listheader>
+        ///    <item>
+        ///        <term>小于0</term>
+        ///        <description><paramref name="x"/>小于<paramref name="y"/></description>
+        ///    </item>
+        ///    <item>
+        ///        <term>0</term>
+        ///        <description><paramref name="x"/>等于<paramref name="y"/></description>
+        ///    </item>
+        ///    <item>
+        ///        <term>大于0</term>
+        ///        <description><paramref name="x"/>大于<paramref name="y"/></description>
+        ///    </item>
+        ///</list>
+        /// </returns>
+        /// <exception cref="InvalidOperationException">comparer 为 null，且默认比较器 <see cref="Comparer&lt;T&gt;.Default"/> 找不到<typeparamref name="TSource"/> 类型的 <see cref="IComparable&lt;T&gt;"/> 泛型接口或 <see cref="IComparable"/> 接口的实现。</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="x"/>或<paramref name="y"/>等于null。</exception>
+        /// <exception cref="ArgumentException"><paramref name="comparer"/> 的实现导致比较时出现错误。 例如，将某个项与其自身进行比较时，<paramref name="comparer"/> 可能不返回 0。</exception>
+        public static int CompareTo<TSource>(IEnumerable<TSource> x, IEnumerable<TSource> y, IComparer<TSource> comparer)
+        {
+            if (x == null)
+            {
+                throw new ArgumentNullException("x");
+            }
+            if (y == null)
+            {
+                throw new ArgumentNullException("y");
+            }
+            
+            if (comparer == null)
+            {
+                comparer = Comparer<TSource>.Default;
+            }
+            var enumeratorX = x.GetEnumerator();
+            var enumeratorY = y.GetEnumerator();
+            while (true)
+            {
+                if (!enumeratorX.MoveNext())
+                {
+                    if (!enumeratorY.MoveNext())
+                    {
+                        return 0;
+                    }
+                    return -1;
+                }
+                if (!enumeratorY.MoveNext())
+                {
+                    return 1;
+                }
+                var currentCompareResult = comparer.Compare(enumeratorX.Current, enumeratorY.Current);
+                if (currentCompareResult != 0)
+                {
+                    return currentCompareResult;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 对两个枚举数进行比较。
+        /// </summary>
+        /// <remarks>
+        /// 将对两个枚举数的元素挨个比较。如果任意一次比较不相等，就以该次比较的结果作为最终比较结果。
+        /// 如果如此比较到其中一个枚举数的元素已经枚举完毕，那么：
+        /// 1.如果另一个枚举数也已枚举完毕，则两者相等；
+        /// 2.否则，则以仍有剩余元素者为大。
+        /// </remarks>
+        /// <typeparam name="TSource">枚举的对象的类型，该类型必须实现<see cref="IComparable&lt;T&gt;"/>接口</typeparam>
+        /// <param name="x">要比较的第一个枚举数</param>
+        /// <param name="y">要比较的第二个枚举数</param>
+        /// <returns>一个有符号整数，指示 <paramref name="x"/> 与 <paramref name="y"/> 的相对值，如下表所示。
+        /// <list type="table">
+        ///    <listheader>
+        ///        <term>值</term>
+        ///        <description>含义</description>
+        ///    </listheader>
+        ///    <item>
+        ///        <term>小于0</term>
+        ///        <description><paramref name="x"/>小于<paramref name="y"/></description>
+        ///    </item>
+        ///    <item>
+        ///        <term>0</term>
+        ///        <description><paramref name="x"/>等于<paramref name="y"/></description>
+        ///    </item>
+        ///    <item>
+        ///        <term>大于0</term>
+        ///        <description><paramref name="x"/>大于<paramref name="y"/></description>
+        ///    </item>
+        ///</list>
+        /// </returns>
+        /// <exception cref="ArgumentNullException"><paramref name="x"/>或<paramref name="y"/>等于null。</exception>
+        public static int CompareTo<TSource>(IEnumerable<TSource> x, IEnumerable<TSource> y) where TSource : IComparable<TSource>
+        {
+            if (x == null)
+            {
+                throw new ArgumentNullException("x");
+            }
+            if (y == null)
+            {
+                throw new ArgumentNullException("y");
+            }
+
+            var enumeratorX = x.GetEnumerator();
+            var enumeratorY = y.GetEnumerator();
+            while (true)
+            {
+                if (!enumeratorX.MoveNext())
+                {
+                    if (!enumeratorY.MoveNext())
+                    {
+                        return 0;
+                    }
+                    return -1;
+                }
+                if (!enumeratorY.MoveNext())
+                {
+                    return 1;
+                }
+                var currentCompareResult = ReferenceEquals(enumeratorX.Current, null) ? (ReferenceEquals(enumeratorY.Current, null) ? 0 : -1) : enumeratorX.Current.CompareTo(enumeratorY.Current);
+                if (currentCompareResult != 0)
+                {
+                    return currentCompareResult;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 判断第一个枚举数是否以第二个枚举数作为开始部分
+        /// </summary>
+        /// <typeparam name="TSource">枚举的对象的类型，该类型必须实现<see cref="IEquatable&lt;T&gt;"/>接口</typeparam>
+        /// <param name="x">第一个枚举数</param>
+        /// <param name="y">第二个枚举数</param>
+        /// <returns>判断结果</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="x"/>或<paramref name="y"/>为null。</exception>
+        public static bool StartsWith<TSource>(IEnumerable<TSource> x, IEnumerable<TSource> y) where TSource : IEquatable<TSource>
+        {
+            if (x == null)
+            {
+                throw new ArgumentNullException("x");
+            }
+            if (y == null)
+            {
+                throw new ArgumentNullException("y");
+            }
+
+            var enumeratorX = x.GetEnumerator();
+            var enumeratorY = y.GetEnumerator();
+            while (true)
+            {
+                if (!enumeratorX.MoveNext())
+                {
+                    if (!enumeratorY.MoveNext())
+                    {
+                        return true;
+                    }
+                    return false;
+                }
+                if (!enumeratorY.MoveNext())
+                {
+                    return true;
+                }
+                var ifCurrentEqual = ReferenceEquals(enumeratorX.Current, null) ? ReferenceEquals(enumeratorY.Current, null) : enumeratorX.Current.Equals(enumeratorY.Current);
+                if (!ifCurrentEqual)
+                {
+                    return false;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 判断第一个枚举数是否以第二个枚举数作为开始部分
+        /// </summary>
+        /// <typeparam name="TSource">枚举的对象的类型，该类型必须实现<see cref="IEquatable&lt;T&gt;"/>接口</typeparam>
+        /// <param name="x">第一个枚举数</param>
+        /// <param name="y">第二个枚举数</param>
+        /// <param name="equalityComparer">用于执行相等比较的接口对象</param>
+        /// <returns>判断结果</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="x"/>,<paramref name="y"/>, 或<paramref name="equalityComparer"/>为null。</exception>
+        public static bool StartsWith<TSource>(IEnumerable<TSource> x, IEnumerable<TSource> y, IEqualityComparer<TSource> equalityComparer)
+        {
+            if (x == null)
+            {
+                throw new ArgumentNullException("x");
+            }
+            if (y == null)
+            {
+                throw new ArgumentNullException("y");
+            }
+
+            if (equalityComparer == null)
+            {
+                throw new ArgumentNullException("equalityComparer");
+            }
+
+            var enumeratorX = x.GetEnumerator();
+            var enumeratorY = y.GetEnumerator();
+            while (true)
+            {
+                if (!enumeratorX.MoveNext())
+                {
+                    if (!enumeratorY.MoveNext())
+                    {
+                        return true;
+                    }
+                    return false;
+                }
+                if (!enumeratorY.MoveNext())
+                {
+                    return true;
+                }
+                var ifCurrentEqual = equalityComparer.Equals(enumeratorX.Current, enumeratorY.Current);
+                if (!ifCurrentEqual)
+                {
+                    return false;
+                }
+            }
+        }
+        #endregion
     }
 
     internal class EmptyEnumerable<TElement>
