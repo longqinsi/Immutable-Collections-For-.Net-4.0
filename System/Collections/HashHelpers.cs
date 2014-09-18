@@ -27,7 +27,7 @@ namespace System.Collections
      };
         private static RandomNumberGenerator rng;
         private static ConditionalWeakTable<object, SerializationInfo> s_SerializationInfoTable;
-        public static bool s_UseRandomizedStringHashing = ExternalInvoke.UseRandomizedHashing();
+        //public static bool s_UseRandomizedStringHashing = ExternalInvoke.UseRandomizedHashing();
 
         // Methods
         public static int ExpandPrime(int oldSize)

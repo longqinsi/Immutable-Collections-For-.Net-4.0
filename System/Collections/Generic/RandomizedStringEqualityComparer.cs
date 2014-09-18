@@ -59,11 +59,11 @@ namespace System.Collections.Generic
             {
                 return 0;
             }
-            string s = obj as string;
-            if (s != null)
-            {
-                return ExternalInvoke.InternalMarvin32HashString(s, s.Length, this._entropy);
-            }
+            //string s = obj as string;
+            //if (s != null)
+            //{
+            //    return ExternalInvoke.InternalMarvin32HashString(s, s.Length, this._entropy);
+            //}
             return obj.GetHashCode();
         }
 
@@ -74,7 +74,8 @@ namespace System.Collections.Generic
             {
                 return 0;
             }
-            return ExternalInvoke.InternalMarvin32HashString(obj, obj.Length, this._entropy);
+            //return ExternalInvoke.InternalMarvin32HashString(obj, obj.Length, this._entropy);
+            return obj.GetHashCode();
         }
 
         IEqualityComparer IWellKnownStringEqualityComparer.GetEqualityComparerForSerialization()

@@ -68,7 +68,6 @@
     <Compile Include="System\Collections\RandomizedObjectEqualityComparer.cs" />
     <Compile Include="System\ExceptionArgument.cs" />
     <Compile Include="System\ExceptionResource.cs" />
-    <Compile Include="System\ExternalInvoke.cs" />
     <Compile Include="System\FuncV20.cs" />
     <Compile Include="System\IWellKnownStringEqualityComparer.cs" />
     <Compile Include="System\Linq\EnumerableV20.cs" />

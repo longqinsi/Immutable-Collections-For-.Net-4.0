@@ -43,10 +43,10 @@ namespace System.Collections
                 return 0;
             }
             string s = obj as string;
-            if (s != null)
-            {
-                return ExternalInvoke.InternalMarvin32HashString(s, s.Length, this._entropy);
-            }
+            //if (s != null)
+            //{
+            //    return ExternalInvoke.InternalMarvin32HashString(s, s.Length, this._entropy);
+            //}
             return obj.GetHashCode();
         }
 
